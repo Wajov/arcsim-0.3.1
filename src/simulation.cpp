@@ -150,7 +150,7 @@ void advance_frame (Simulation &sim) {
         advance_step(sim);
 }
 
-void advance_step (Simulation &sim) {	
+void advance_step (Simulation &sim) {
 	cout << "Sim frame " << sim.frame << " [" << sim.step << "]" << endl;
     sim.time += sim.step_time;
     sim.step++;
@@ -170,18 +170,18 @@ void advance_step (Simulation &sim) {
     physics_step(sim, cons);
     //cout << "phys" << endl;wait_key();
     consistency("physics");
-    plasticity_step(sim);
-    consistency("plasticity");
-    strainlimiting_step(sim, cons);
-    consistency("strainlimit");
-    collision_step(sim);
-    consistency("collision");
+//    plasticity_step(sim);
+//    consistency("plasticity");
+//    strainlimiting_step(sim, cons);
+//    consistency("strainlimit");
+//    collision_step(sim);
+//    consistency("collision");
     //cout << "coll" << endl;wait_key();
-    if (sim.step % sim.frame_steps == 0) {
-        remeshing_step(sim);
-        consistency("remeshing");
-    	sim.frame++;
-    }
+//    if (sim.step % sim.frame_steps == 0) {
+//        remeshing_step(sim);
+//        consistency("remeshing");
+//    	sim.frame++;
+//    }
     //cout << "rem" << endl;wait_key();
     
     delete_constraints(cons);
@@ -213,6 +213,16 @@ void update_velocities (vector<Mesh*> &meshes, vector<Vec3> &xold, double dt);
 void step_mesh (Mesh &mesh, double dt);
 
 void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
+    std::ofstream fout("../ClothSimulator/input.txt");
+    for (const Node* node : sim.cloths[0].mesh.nodes) {
+        for (int i = 0; i < 3; i++)
+            fout << node->x[i] << ' ';
+        for (int i = 0; i < 3; i++)
+            fout << node->v[i] << ' ';
+        fout << std::endl;
+    }
+    fout.close();
+
     if (!sim.enabled[physics])
         return;
     sim.timers[physics].tick();
@@ -224,15 +234,21 @@ void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
 
         activate_nodes(mesh.nodes);
         add_external_forces(mesh.nodes, mesh.faces, sim.gravity, sim.wind, fext, Jext);
+//        std::cout << fext << std::endl;
         for (size_t h = 0; h < sim.handles.size(); h++)
             sim.handles[h]->add_forces(sim.time,fext,Jext);
+//        std::cout << fext << std::endl;
 
         for (size_t m = 0; m < sim.morphs.size(); m++)
             if (sim.morphs[m].mesh == &sim.cloths[c].mesh)
                 add_morph_forces(sim.cloths[c], sim.morphs[m], sim.time,
                                  sim.step_time, fext, Jext);
+//        std::cout << fext << std::endl;
+
         vector<Vec3> dv = implicit_update(mesh.nodes, mesh.edges, mesh.faces, 
                                           fext, Jext, cons, sim.step_time);
+
+//        std::cout << dv << std::endl;
         for (size_t n = 0; n < mesh.nodes.size(); n++) {
             mesh.nodes[n]->v += dv[n];
             mesh.nodes[n]->acceleration = dv[n] / sim.step_time;

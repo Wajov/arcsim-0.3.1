@@ -36,6 +36,7 @@
 #include "timer.hpp"
 #include <string>
 #include <vector>
+#include <cstdio>
 
 struct Wind {
     double density;

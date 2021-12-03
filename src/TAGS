@@ -1035,30 +1035,30 @@ Mat3x3 deformation_gradient 78,2715
 Mat3x3 material_model 83,2929
 double stretching_energy 100,3625
 pair<Mat9x9,Vec9> stretching_force 109,3873
-typedef Mat<12,12> Mat12x12;171,6771
-typedef Vec<12> Vec12;172,6800
-double bending_coeff(174,6824
-double bending_energy 193,7579
-double distance 201,7803
-Vec2 barycentric_weights 208,8002
-pair<Mat12x12,Vec12> bending_force 215,8177
-template <int m,238,9214
-template <int m, int n> Mat<3,3> submat3 238,9214
-template <int n> Vec<3> subvec3 246,9437
-template <int m> void add_submat 253,9591
-template <int m> void add_subvec 263,9904
-Vec<3,int> indices 270,10115
-Vec<4,int> indices 278,10351
-double internal_energy 289,10685
-void add_internal_forces 305,11236
-double constraint_energy 354,13399
-void add_constraint_forces 364,13650
-void add_friction_forces 400,15025
-vector<Vec3> implicit_update 420,15794
-Vec3 wind_force 452,16946
-void add_external_forces 461,17292
-void add_morph_forces 476,17860
-void project_outside 496,18732
+typedef Mat<12,12> Mat12x12;172,6820
+typedef Vec<12> Vec12;173,6849
+double bending_coeff(175,6873
+double bending_energy 194,7628
+double distance 202,7852
+Vec2 barycentric_weights 209,8051
+pair<Mat12x12,Vec12> bending_force 216,8226
+template <int m,239,9263
+template <int m, int n> Mat<3,3> submat3 239,9263
+template <int n> Vec<3> subvec3 247,9486
+template <int m> void add_submat 254,9640
+template <int m> void add_subvec 264,9953
+Vec<3,int> indices 271,10164
+Vec<4,int> indices 279,10400
+double internal_energy 290,10734
+void add_internal_forces 306,11285
+double constraint_energy 361,13659
+void add_constraint_forces 371,13910
+void add_friction_forces 407,15285
+vector<Vec3> implicit_update 427,16054
+Vec3 wind_force 482,17905
+void add_external_forces 491,18251
+void add_morph_forces 506,18819
+void project_outside 526,19691
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
@@ -1377,7 +1377,7 @@ struct SplitNode 32,1368
 	SplitNode(38,1448
     bool operator<(39,1555
 
-simulation.cpp,772
+simulation.cpp,773
 bool consistency_check 47,1726
 bool single_step 48,1758
 static const bool verbose 50,1785
@@ -1388,61 +1388,61 @@ void relax_initial_state 104,3853
 void validate_handles 129,4625
 void advance_frame 148,5333
 void advance_step 153,5448
-vector<Constraint*> get_constraints 190,6605
-void delete_constraints 204,7193
-void physics_step 215,7458
-void step_mesh 253,9078
-void plasticity_step 258,9224
-void strainlimiting_step 271,9599
-void equilibration_step 281,10008
-void strainzeroing_step 305,10856
-void collision_step 322,11564
-void remeshing_step 334,12003
-void update_velocities 380,13495
-void update_obstacles 390,13829
-void add_jitter 409,14555
-vector<Vec3> node_positions 418,14880
+vector<Constraint*> get_constraints 190,6626
+void delete_constraints 204,7214
+void physics_step 215,7479
+void step_mesh 269,9580
+void plasticity_step 274,9726
+void strainlimiting_step 287,10101
+void equilibration_step 297,10510
+void strainzeroing_step 321,11358
+void collision_step 338,12066
+void remeshing_step 350,12505
+void update_velocities 396,13997
+void update_obstacles 406,14331
+void add_jitter 425,15057
+vector<Vec3> node_positions 434,15382
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321
-struct Wind 40,1539
-    double density;41,1553
-    Vec3 velocity;42,1573
-    double drag;43,1592
-struct Simulation 46,1613
-    double time;48,1650
-    int frame,49,1667
-    int frame, step;49,1667
-    std::vector<Cloth> cloths;50,1688
-    int frame_steps,52,1736
-    int frame_steps, save_every;52,1736
-    double frame_time,53,1769
-    double frame_time, step_time;53,1769
-    double end_time,54,1803
-    double end_time, end_frame;54,1803
-    double passive_time;55,1835
-    std::vector<Motion> motions;56,1860
-    std::vector<Handle*> handles;57,1893
-    std::vector<Obstacle> obstacles;58,1927
-    std::vector<Morph> morphs;59,1964
-    Vec3 gravity;60,1995
-    Wind wind;61,2013
-    double friction,62,2028
-    double friction, obs_friction;62,2028
-    enum {Proximity,Proximity63,2063
-    enum {Proximity, Physics,63,2063
-    enum {Proximity, Physics, StrainLimiting,63,2063
-    enum {Proximity, Physics, StrainLimiting, Collision,63,2063
-    enum {Proximity, Physics, StrainLimiting, Collision, Remeshing,63,2063
-    enum {Proximity, Physics, StrainLimiting, Collision, Remeshing, Separation,63,2063
-          PopFilter,64,2143
-          PopFilter, Plasticity,64,2143
-          PopFilter, Plasticity, Fracture,64,2143
-          PopFilter, Plasticity, Fracture, nModules}nModules64,2143
-    bool enabled[enabled65,2197
-    Timer timers[timers66,2225
-    std::vector<Mesh*> cloth_meshes,68,2275
-    std::vector<Mesh*> cloth_meshes, obstacle_meshes;68,2275
+struct Wind 41,1557
+    double density;42,1571
+    Vec3 velocity;43,1591
+    double drag;44,1610
+struct Simulation 47,1631
+    double time;49,1668
+    int frame,50,1685
+    int frame, step;50,1685
+    std::vector<Cloth> cloths;51,1706
+    int frame_steps,53,1754
+    int frame_steps, save_every;53,1754
+    double frame_time,54,1787
+    double frame_time, step_time;54,1787
+    double end_time,55,1821
+    double end_time, end_frame;55,1821
+    double passive_time;56,1853
+    std::vector<Motion> motions;57,1878
+    std::vector<Handle*> handles;58,1911
+    std::vector<Obstacle> obstacles;59,1945
+    std::vector<Morph> morphs;60,1982
+    Vec3 gravity;61,2013
+    Wind wind;62,2031
+    double friction,63,2046
+    double friction, obs_friction;63,2046
+    enum {Proximity,Proximity64,2081
+    enum {Proximity, Physics,64,2081
+    enum {Proximity, Physics, StrainLimiting,64,2081
+    enum {Proximity, Physics, StrainLimiting, Collision,64,2081
+    enum {Proximity, Physics, StrainLimiting, Collision, Remeshing,64,2081
+    enum {Proximity, Physics, StrainLimiting, Collision, Remeshing, Separation,64,2081
+          PopFilter,65,2161
+          PopFilter, Plasticity,65,2161
+          PopFilter, Plasticity, Fracture,65,2161
+          PopFilter, Plasticity, Fracture, nModules}nModules65,2161
+    bool enabled[enabled66,2215
+    Timer timers[timers67,2243
+    std::vector<Mesh*> cloth_meshes,69,2293
+    std::vector<Mesh*> cloth_meshes, obstacle_meshes;69,2293
 
 sparse.hpp,606
 #define SPARSE_HPP28,1317

@@ -407,7 +407,7 @@ adje	mesh.hpp	/^    std::vector<Edge*> adje; \/\/ adjacent edges$/;"	m	struct:No
 adjf	mesh.hpp	/^    Face *adjf[2]; \/\/ adjacent faces$/;"	m	struct:Edge	typeref:typename:Face * [2]
 adjf	mesh.hpp	/^    std::vector<Face*> adjf; \/\/ adjacent faces$/;"	m	struct:Vert	typeref:typename:std::vector<Face * >
 advance_frame	simulation.cpp	/^void advance_frame (Simulation &sim) {$/;"	f	typeref:typename:void
-advance_step	simulation.cpp	/^void advance_step (Simulation &sim) {	$/;"	f	typeref:typename:void
+advance_step	simulation.cpp	/^void advance_step (Simulation &sim) {$/;"	f	typeref:typename:void
 alglib_linear_solve	taucs.cpp	/^vector<double> alglib_linear_solve(const SpMat<double>& A, const vector<double>& b) {$/;"	f	typeref:typename:vector<double>
 alglib_linear_solve_vec	taucs.cpp	/^vector<Vec<C> > alglib_linear_solve_vec(const SpMat<Mat<C,C> >& A, const vector<Vec<C> >& b) {$/;"	f	typeref:typename:vector<Vec<C>>
 aligned_free	vectors.hpp	/^inline void aligned_free(void *ptr)    { _aligned_free(ptr); }$/;"	f	typeref:typename:void
