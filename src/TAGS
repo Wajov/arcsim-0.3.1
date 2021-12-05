@@ -1051,14 +1051,14 @@ Vec<3,int> indices 271,10164
 Vec<4,int> indices 279,10400
 double internal_energy 290,10734
 void add_internal_forces 306,11285
-double constraint_energy 361,13659
-void add_constraint_forces 371,13910
-void add_friction_forces 407,15285
-vector<Vec3> implicit_update 427,16054
-Vec3 wind_force 482,17905
-void add_external_forces 491,18251
-void add_morph_forces 506,18819
-void project_outside 526,19691
+double constraint_energy 362,13693
+void add_constraint_forces 372,13944
+void add_friction_forces 408,15319
+vector<Vec3> implicit_update 428,16088
+Vec3 wind_force 483,17969
+void add_external_forces 492,18315
+void add_morph_forces 507,18883
+void project_outside 527,19755
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
@@ -1391,17 +1391,17 @@ void advance_step 153,5448
 vector<Constraint*> get_constraints 190,6626
 void delete_constraints 204,7214
 void physics_step 215,7479
-void step_mesh 269,9580
-void plasticity_step 274,9726
-void strainlimiting_step 287,10101
-void equilibration_step 297,10510
-void strainzeroing_step 321,11358
-void collision_step 338,12066
-void remeshing_step 350,12505
-void update_velocities 396,13997
-void update_obstacles 406,14331
-void add_jitter 425,15057
-vector<Vec3> node_positions 434,15382
+void step_mesh 269,9598
+void plasticity_step 274,9744
+void strainlimiting_step 287,10119
+void equilibration_step 297,10528
+void strainzeroing_step 321,11376
+void collision_step 338,12084
+void remeshing_step 350,12523
+void update_velocities 396,14015
+void update_obstacles 406,14349
+void add_jitter 425,15075
+vector<Vec3> node_positions 434,15400
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321

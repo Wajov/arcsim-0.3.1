@@ -325,6 +325,7 @@ void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges
             add_subvec(F, indices(n0,n1,n2), b);
         } else {
             double damping = face->material->damping;
+            assert(damping == 0);
             add_submat(-dt*(dt+damping)*J, indices(n0,n1,n2), A);
             add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2), b);
         }
@@ -441,28 +442,28 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
         A(n,n) += Mat3x3(nodes[n]->m) - dt*dt*Jext[n];
         b[n] += dt*fext[n];        
     }
+
+//    std::ofstream fout("../ClothSimulator/output.txt");
+//    SpMat<Mat3x3> At = A;
+//    for (int i = 0; i < nn; i++)
+//        for (int k = 0; k < 3; k++) {
+//            for (int j = 0; j < nn; j++)
+//                for (int h = 0; h < 3; h++)
+//                    fout << At(i, j)(k, h) << ' ';
+//            fout << std::endl;
+//        }
+//    fout << std::endl;
+//    for (int i = 0; i < nn; i++)
+//        for (int j = 0; j < 3; j++)
+//            fout << b[i][j] << ' ';
+//    fout << std::endl;
+//    fout.close();
+
 //    std::cout << A << std::endl;
 //    std::cout << b << std::endl;
     consistency((vector<Vec3>&)fext, "fext");
     consistency(b, "init");
     add_internal_forces<WS>(faces, edges, A, b, dt);
-
-    std::ofstream fout("../ClothSimulator/output.txt");
-    SpMat<Mat3x3> At = A;
-    for (int i = 0; i < nn; i++)
-        for (int k = 0; k < 3; k++) {
-            for (int j = 0; j < nn; j++)
-                for (int h = 0; h < 3; h++)
-                    fout << At(i, j)(k, h) << ' ';
-            fout << std::endl;
-        }
-    fout << std::endl;
-    for (int i = 0; i < nn; i++)
-        for (int j = 0; j < 3; j++)
-            fout << b[i][j] << ' ';
-    fout << std::endl;
-    fout.close();
-
 //    std::cout << b << std::endl;
     consistency(b, "internal forces");
     add_constraint_forces(cons, A, b, dt);

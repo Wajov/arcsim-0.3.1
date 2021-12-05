@@ -213,15 +213,15 @@ void update_velocities (vector<Mesh*> &meshes, vector<Vec3> &xold, double dt);
 void step_mesh (Mesh &mesh, double dt);
 
 void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
-    std::ofstream fout("../ClothSimulator/input.txt");
-    for (const Node* node : sim.cloths[0].mesh.nodes) {
-        for (int i = 0; i < 3; i++)
-            fout << node->x[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->v[i] << ' ';
-        fout << std::endl;
-    }
-    fout.close();
+//    std::ofstream fout("../ClothSimulator/input.txt");
+//    for (const Node* node : sim.cloths[0].mesh.nodes) {
+//        for (int i = 0; i < 3; i++)
+//            fout << node->x[i] << ' ';
+//        for (int i = 0; i < 3; i++)
+//            fout << node->v[i] << ' ';
+//        fout << std::endl;
+//    }
+//    fout.close();
 
     if (!sim.enabled[physics])
         return;
