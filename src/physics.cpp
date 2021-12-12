@@ -126,8 +126,14 @@ pair<Mat9x9,Vec9> stretching_force (const Face *face) {
     Vec9 grad_f(0);
     Mat9x9 hess_f(0);
     if (mat->use_dde) {
-        Vec4 k(83.2748f, 0.0f, 219.68f, 133.782f);
-//        Vec4 k = stretching_stiffness(reduce_xy(G), mat->dde_stretching) * weakening_mult;
+//        Vec4 k(83.2748f, 0.0f, 219.68f, 133.782f);
+        assert(weakening_mult == 1.0);
+        Vec4 k = stretching_stiffness(reduce_xy(G), mat->dde_stretching) * weakening_mult;
+
+        std::ofstream fout("../ClothSimulator/output.txt", std::ios::app);
+        for (int i = 0; i < 4; i++)
+            fout << k[i] << ' ';
+        fout << std::endl;
 
         const Mat<3,9>& Du = DD[0];
         const Mat<3,9>& Dv = DD[1];
@@ -443,7 +449,8 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
         b[n] += dt*fext[n];        
     }
 
-//    std::ofstream fout("../ClothSimulator/output.txt");
+    std::ofstream fout("../ClothSimulator/output.txt");
+    fout.close();
 //    SpMat<Mat3x3> At = A;
 //    for (int i = 0; i < nn; i++)
 //        for (int k = 0; k < 3; k++) {

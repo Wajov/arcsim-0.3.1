@@ -1015,7 +1015,7 @@ inline Mat3x3 get_submat 115,4861
 inline void set_submat 121,5061
 inline void add_submat 125,5246
 
-physics.cpp,1507
+physics.cpp,1508
 static const bool verbose 38,1486
 static void consistency(42,1588
 typedef Mat<9,9> Mat9x9;49,1750
@@ -1035,30 +1035,30 @@ Mat3x3 deformation_gradient 78,2715
 Mat3x3 material_model 83,2929
 double stretching_energy 100,3625
 pair<Mat9x9,Vec9> stretching_force 109,3873
-typedef Mat<12,12> Mat12x12;172,6820
-typedef Vec<12> Vec12;173,6849
-double bending_coeff(175,6873
-double bending_energy 194,7628
-double distance 202,7852
-Vec2 barycentric_weights 209,8051
-pair<Mat12x12,Vec12> bending_force 216,8226
-template <int m,239,9263
-template <int m, int n> Mat<3,3> submat3 239,9263
-template <int n> Vec<3> subvec3 247,9486
-template <int m> void add_submat 254,9640
-template <int m> void add_subvec 264,9953
-Vec<3,int> indices 271,10164
-Vec<4,int> indices 279,10400
-double internal_energy 290,10734
-void add_internal_forces 306,11285
-double constraint_energy 362,13693
-void add_constraint_forces 372,13944
-void add_friction_forces 408,15319
-vector<Vec3> implicit_update 428,16088
-Vec3 wind_force 483,17969
-void add_external_forces 492,18315
-void add_morph_forces 507,18883
-void project_outside 527,19755
+typedef Mat<12,12> Mat12x12;178,7031
+typedef Vec<12> Vec12;179,7060
+double bending_coeff(181,7084
+double bending_energy 200,7839
+double distance 208,8063
+Vec2 barycentric_weights 215,8262
+pair<Mat12x12,Vec12> bending_force 222,8437
+template <int m,245,9474
+template <int m, int n> Mat<3,3> submat3 245,9474
+template <int n> Vec<3> subvec3 253,9697
+template <int m> void add_submat 260,9851
+template <int m> void add_subvec 270,10164
+Vec<3,int> indices 277,10375
+Vec<4,int> indices 285,10611
+double internal_energy 296,10945
+void add_internal_forces 312,11496
+double constraint_energy 368,13904
+void add_constraint_forces 378,14155
+void add_friction_forces 414,15530
+vector<Vec3> implicit_update 434,16299
+Vec3 wind_force 490,18196
+void add_external_forces 499,18542
+void add_morph_forces 514,19110
+void project_outside 534,19982
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
@@ -1391,17 +1391,17 @@ void advance_step 153,5448
 vector<Constraint*> get_constraints 190,6626
 void delete_constraints 204,7214
 void physics_step 215,7479
-void step_mesh 269,9598
-void plasticity_step 274,9744
-void strainlimiting_step 287,10119
-void equilibration_step 297,10528
-void strainzeroing_step 321,11376
-void collision_step 338,12084
-void remeshing_step 350,12523
-void update_velocities 396,14015
-void update_obstacles 406,14349
-void add_jitter 425,15075
-vector<Vec3> node_positions 434,15400
+void step_mesh 269,9580
+void plasticity_step 274,9726
+void strainlimiting_step 287,10101
+void equilibration_step 297,10510
+void strainzeroing_step 321,11358
+void collision_step 338,12066
+void remeshing_step 350,12505
+void update_velocities 396,13997
+void update_obstacles 406,14331
+void add_jitter 425,15057
+vector<Vec3> node_positions 434,15382
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321
