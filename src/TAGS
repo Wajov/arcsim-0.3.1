@@ -1051,14 +1051,14 @@ Vec<3,int> indices 277,10375
 Vec<4,int> indices 285,10611
 double internal_energy 296,10945
 void add_internal_forces 312,11496
-double constraint_energy 368,13904
-void add_constraint_forces 378,14155
-void add_friction_forces 414,15530
-vector<Vec3> implicit_update 434,16299
-Vec3 wind_force 490,18196
-void add_external_forces 499,18542
-void add_morph_forces 514,19110
-void project_outside 534,19982
+double constraint_energy 369,13902
+void add_constraint_forces 379,14153
+void add_friction_forces 415,15528
+vector<Vec3> implicit_update 435,16297
+Vec3 wind_force 491,18194
+void add_external_forces 500,18540
+void add_morph_forces 515,19108
+void project_outside 535,19980
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
