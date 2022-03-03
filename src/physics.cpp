@@ -130,11 +130,6 @@ pair<Mat9x9,Vec9> stretching_force (const Face *face) {
         assert(weakening_mult == 1.0);
         Vec4 k = stretching_stiffness(reduce_xy(G), mat->dde_stretching) * weakening_mult;
 
-        std::ofstream fout("../ClothSimulator/output.txt", std::ios::app);
-        for (int i = 0; i < 4; i++)
-            fout << k[i] << ' ';
-        fout << std::endl;
-
         const Mat<3,9>& Du = DD[0];
         const Mat<3,9>& Dv = DD[1];
         Vec9 fuu = Du.t()*f[0], fvv = Dv.t()*f[1], fuv = (Du.t()*f[1] + Dv.t()*f[0])/2.;
@@ -336,29 +331,29 @@ void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges
             add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2), b);
         }
     }
-    for (size_t e = 0; e < edges.size(); e++) {
-        const Edge *edge = edges[e];
-        if (!edge->adjf[0] || !edge->adjf[1])
-            continue;
-        pair<Mat12x12,Vec12> bendF = bending_force<s>(edge);
-        const Node *n0 = edge->n[0],
-                   *n1 = edge->n[1],
-                   *n2 = edge_opp_vert(edge, 0)->node,
-                   *n3 = edge_opp_vert(edge, 1)->node;
-        Vec12 vs = mat_to_vec(Mat3x4(n0->v, n1->v, n2->v, n3->v));
-        Mat12x12 J = bendF.first;
-        Vec12 F = bendF.second;
-
-        if (dt == 0) {
-            add_submat(-J, indices(n0,n1,n2,n3), A);
-            add_subvec(F, indices(n0,n1,n2,n3), b);
-        } else {
-            double damping = (edge->adjf[0]->material->damping +
-							  edge->adjf[1]->material->damping) * 0.5;
-            add_submat(-dt*(dt+damping)*J, indices(n0,n1,n2,n3), A);
-            add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2,n3), b);
-        }
-    }
+//    for (size_t e = 0; e < edges.size(); e++) {
+//        const Edge *edge = edges[e];
+//        if (!edge->adjf[0] || !edge->adjf[1])
+//            continue;
+//        pair<Mat12x12,Vec12> bendF = bending_force<s>(edge);
+//        const Node *n0 = edge->n[0],
+//                   *n1 = edge->n[1],
+//                   *n2 = edge_opp_vert(edge, 0)->node,
+//                   *n3 = edge_opp_vert(edge, 1)->node;
+//        Vec12 vs = mat_to_vec(Mat3x4(n0->v, n1->v, n2->v, n3->v));
+//        Mat12x12 J = bendF.first;
+//        Vec12 F = bendF.second;
+//
+//        if (dt == 0) {
+//            add_submat(-J, indices(n0,n1,n2,n3), A);
+//            add_subvec(F, indices(n0,n1,n2,n3), b);
+//        } else {
+//            double damping = (edge->adjf[0]->material->damping +
+//							  edge->adjf[1]->material->damping) * 0.5;
+//            add_submat(-dt*(dt+damping)*J, indices(n0,n1,n2,n3), A);
+//            add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2,n3), b);
+//        }
+//    }
 }
 template void add_internal_forces<PS> (const vector<Face*>&, const vector<Edge*>&, 
                                        SpMat<Mat3x3> &, vector<Vec3>&, double);
@@ -449,40 +444,34 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
         b[n] += dt*fext[n];        
     }
 
-    std::ofstream fout("../ClothSimulator/output.txt");
-    fout.close();
-//    SpMat<Mat3x3> At = A;
-//    for (int i = 0; i < nn; i++)
-//        for (int k = 0; k < 3; k++) {
-//            for (int j = 0; j < nn; j++)
-//                for (int h = 0; h < 3; h++)
-//                    fout << At(i, j)(k, h) << ' ';
-//            fout << std::endl;
-//        }
-//    fout << std::endl;
-//    for (int i = 0; i < nn; i++)
-//        for (int j = 0; j < 3; j++)
-//            fout << b[i][j] << ' ';
-//    fout << std::endl;
-//    fout.close();
-
-//    std::cout << A << std::endl;
-//    std::cout << b << std::endl;
     consistency((vector<Vec3>&)fext, "fext");
     consistency(b, "init");
     add_internal_forces<WS>(faces, edges, A, b, dt);
-//    std::cout << b << std::endl;
     consistency(b, "internal forces");
     add_constraint_forces(cons, A, b, dt);
-//    std::cout << b << std::endl;
     consistency(b, "constraints");
 //    add_friction_forces(cons, A, b, dt);
 //    consistency(b, "friction");
     ::debug_nodes = &nodes;
-//    std::cout << A << std::endl << b << std::endl;
     vector<Vec3> dv = taucs_linear_solve(A, b);
     ::debug_nodes = 0;
     consistency(dv, "taucs");
+
+    std::ofstream fout("../ClothSimulator/standard.txt");
+    SpMat<Mat3x3> At = A;
+    for (int i = 0; i < nn; i++)
+        for (int k = 0; k < 3; k++) {
+            for (int j = 0; j < nn; j++)
+                for (int h = 0; h < 3; h++)
+                    fout << At(i, j)(k, h) << ' ';
+            fout << std::endl;
+        }
+    fout << std::endl;
+    for (int i = 0; i < nn; i++)
+        for (int j = 0; j < 3; j++)
+            fout << b[i][j] << ' ';
+    fout << std::endl;
+    fout.close();
 
     return dv;    
 }
