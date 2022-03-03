@@ -234,21 +234,17 @@ void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
 
         activate_nodes(mesh.nodes);
         add_external_forces(mesh.nodes, mesh.faces, sim.gravity, sim.wind, fext, Jext);
-//        std::cout << fext << std::endl;
-        for (size_t h = 0; h < sim.handles.size(); h++)
-            sim.handles[h]->add_forces(sim.time,fext,Jext);
-//        std::cout << fext << std::endl;
-
-        for (size_t m = 0; m < sim.morphs.size(); m++)
-            if (sim.morphs[m].mesh == &sim.cloths[c].mesh)
-                add_morph_forces(sim.cloths[c], sim.morphs[m], sim.time,
-                                 sim.step_time, fext, Jext);
-//        std::cout << fext << std::endl;
+//        for (size_t h = 0; h < sim.handles.size(); h++)
+//            sim.handles[h]->add_forces(sim.time,fext,Jext);
+//
+//        for (size_t m = 0; m < sim.morphs.size(); m++)
+//            if (sim.morphs[m].mesh == &sim.cloths[c].mesh)
+//                add_morph_forces(sim.cloths[c], sim.morphs[m], sim.time,
+//                                 sim.step_time, fext, Jext);
 
         vector<Vec3> dv = implicit_update(mesh.nodes, mesh.edges, mesh.faces, 
                                           fext, Jext, cons, sim.step_time);
 
-//        std::cout << dv << std::endl;
         for (size_t n = 0; n < mesh.nodes.size(); n++) {
             mesh.nodes[n]->v += dv[n];
             mesh.nodes[n]->acceleration = dv[n] / sim.step_time;

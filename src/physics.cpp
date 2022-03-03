@@ -444,19 +444,6 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
         b[n] += dt*fext[n];        
     }
 
-    consistency((vector<Vec3>&)fext, "fext");
-    consistency(b, "init");
-    add_internal_forces<WS>(faces, edges, A, b, dt);
-    consistency(b, "internal forces");
-    add_constraint_forces(cons, A, b, dt);
-    consistency(b, "constraints");
-//    add_friction_forces(cons, A, b, dt);
-//    consistency(b, "friction");
-    ::debug_nodes = &nodes;
-    vector<Vec3> dv = taucs_linear_solve(A, b);
-    ::debug_nodes = 0;
-    consistency(dv, "taucs");
-
     std::ofstream fout("../ClothSimulator/standard.txt");
     SpMat<Mat3x3> At = A;
     for (int i = 0; i < nn; i++)
@@ -466,12 +453,24 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
                     fout << At(i, j)(k, h) << ' ';
             fout << std::endl;
         }
-    fout << std::endl;
     for (int i = 0; i < nn; i++)
         for (int j = 0; j < 3; j++)
             fout << b[i][j] << ' ';
     fout << std::endl;
     fout.close();
+
+    add_constraint_forces(cons, A, b, dt);
+    consistency(b, "constraints");
+    consistency((vector<Vec3>&)fext, "fext");
+    consistency(b, "init");
+    add_internal_forces<WS>(faces, edges, A, b, dt);
+    consistency(b, "internal forces");
+//    add_friction_forces(cons, A, b, dt);
+//    consistency(b, "friction");
+    ::debug_nodes = &nodes;
+    vector<Vec3> dv = taucs_linear_solve(A, b);
+    ::debug_nodes = 0;
+    consistency(dv, "taucs");
 
     return dv;    
 }
