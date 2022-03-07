@@ -214,6 +214,7 @@ void step_mesh (Mesh &mesh, double dt);
 
 void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
     std::ofstream fout("../ClothSimulator/input.txt");
+    fout.precision(20);
     for (const Node* node : sim.cloths[0].mesh.nodes) {
         for (int i = 0; i < 3; i++)
             fout << node->x[i] << ' ';
