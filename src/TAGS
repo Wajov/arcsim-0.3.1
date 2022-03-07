@@ -1015,7 +1015,7 @@ inline Mat3x3 get_submat 115,4861
 inline void set_submat 121,5061
 inline void add_submat 125,5246
 
-physics.cpp,1507
+physics.cpp,1508
 static const bool verbose 38,1486
 static void consistency(42,1588
 typedef Mat<9,9> Mat9x9;49,1750
@@ -1042,23 +1042,23 @@ double bending_energy 195,7667
 double distance 203,7891
 Vec2 barycentric_weights 210,8090
 pair<Mat12x12,Vec12> bending_force 217,8265
-template <int m,240,9302
-template <int m, int n> Mat<3,3> submat3 240,9302
-template <int n> Vec<3> subvec3 248,9525
-template <int m> void add_submat 255,9679
-template <int m> void add_subvec 265,9992
-Vec<3,int> indices 272,10203
-Vec<4,int> indices 280,10439
-double internal_energy 291,10773
-void add_internal_forces 307,11324
-double constraint_energy 363,13732
-void add_constraint_forces 373,13983
-void add_friction_forces 409,15358
-vector<Vec3> implicit_update 429,16127
-Vec3 wind_force 480,17789
-void add_external_forces 489,18135
-void add_morph_forces 504,18703
-void project_outside 524,19575
+template <int m,241,9338
+template <int m, int n> Mat<3,3> submat3 241,9338
+template <int n> Vec<3> subvec3 249,9561
+template <int m> void add_submat 256,9715
+template <int m> void add_subvec 266,10028
+Vec<3,int> indices 273,10239
+Vec<4,int> indices 281,10475
+double internal_energy 292,10809
+void add_internal_forces 308,11360
+double constraint_energy 364,13722
+void add_constraint_forces 374,13973
+void add_friction_forces 410,15348
+vector<Vec3> implicit_update 430,16117
+Vec3 wind_force 481,17779
+void add_external_forces 490,18125
+void add_morph_forces 505,18693
+void project_outside 525,19565
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
