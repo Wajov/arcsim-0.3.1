@@ -310,11 +310,6 @@ void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges
     for (size_t f = 0; f < faces.size(); f++) {
         const Face* face = faces[f];
 
-//        for (int i = 0; i < 3; i++)
-//            for (int j = 0; j < 3; j++)
-//                std::cout << face->invDm(i, j) << ' ';
-//        std::cout << std::endl;
-
         const Node *n0 = face->v[0]->node, *n1 = face->v[1]->node,
                    *n2 = face->v[2]->node;
         Vec9 vs = mat_to_vec(Mat3x3(n0->v, n1->v, n2->v));
