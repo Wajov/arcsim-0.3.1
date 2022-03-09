@@ -110,7 +110,7 @@ void relax_initial_state (Simulation &sim) {
     bool equilibrate = true;
     if (equilibrate) {
         equilibration_step(sim);
-        remeshing_step(sim, true);
+//        remeshing_step(sim, true);
         equilibration_step(sim);
     } else {
         remeshing_step(sim, true);

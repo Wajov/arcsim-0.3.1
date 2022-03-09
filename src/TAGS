@@ -1051,14 +1051,14 @@ Vec<3,int> indices 272,10203
 Vec<4,int> indices 280,10439
 double internal_energy 291,10773
 void add_internal_forces 307,11324
-double constraint_energy 358,13514
-void add_constraint_forces 368,13765
-void add_friction_forces 404,15140
-vector<Vec3> implicit_update 424,15909
-Vec3 wind_force 475,17571
-void add_external_forces 484,17917
-void add_morph_forces 499,18485
-void project_outside 519,19357
+double constraint_energy 358,13560
+void add_constraint_forces 368,13811
+void add_friction_forces 404,15186
+vector<Vec3> implicit_update 424,15955
+Vec3 wind_force 475,17617
+void add_external_forces 484,17963
+void add_morph_forces 499,18531
+void project_outside 519,19403
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
@@ -1385,23 +1385,23 @@ static const int proximity 51,1820
 static void consistency(71,2722
 void prepare 82,2945
 void relax_initial_state 104,3853
-void validate_handles 129,4625
-void advance_frame 148,5333
-void advance_step 153,5448
-vector<Constraint*> get_constraints 190,6626
-void delete_constraints 204,7214
-void physics_step 215,7479
-void step_mesh 266,9452
-void plasticity_step 271,9598
-void strainlimiting_step 284,9973
-void equilibration_step 294,10382
-void strainzeroing_step 318,11230
-void collision_step 335,11938
-void remeshing_step 347,12377
-void update_velocities 393,13869
-void update_obstacles 403,14203
-void add_jitter 422,14929
-vector<Vec3> node_positions 431,15254
+void validate_handles 129,4627
+void advance_frame 148,5335
+void advance_step 153,5450
+vector<Constraint*> get_constraints 190,6628
+void delete_constraints 204,7216
+void physics_step 215,7481
+void step_mesh 266,9454
+void plasticity_step 271,9600
+void strainlimiting_step 284,9975
+void equilibration_step 294,10384
+void strainzeroing_step 318,11232
+void collision_step 335,11940
+void remeshing_step 347,12379
+void update_velocities 393,13871
+void update_obstacles 403,14205
+void add_jitter 422,14931
+vector<Vec3> node_positions 431,15256
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321
