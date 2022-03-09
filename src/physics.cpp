@@ -326,29 +326,29 @@ void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges
             add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2), b);
         }
     }
-//    for (size_t e = 0; e < edges.size(); e++) {
-//        const Edge *edge = edges[e];
-//        if (!edge->adjf[0] || !edge->adjf[1])
-//            continue;
-//        pair<Mat12x12,Vec12> bendF = bending_force<s>(edge);
-//        const Node *n0 = edge->n[0],
-//                   *n1 = edge->n[1],
-//                   *n2 = edge_opp_vert(edge, 0)->node,
-//                   *n3 = edge_opp_vert(edge, 1)->node;
-//        Vec12 vs = mat_to_vec(Mat3x4(n0->v, n1->v, n2->v, n3->v));
-//        Mat12x12 J = bendF.first;
-//        Vec12 F = bendF.second;
-//
-//        if (dt == 0) {
-//            add_submat(-J, indices(n0,n1,n2,n3), A);
-//            add_subvec(F, indices(n0,n1,n2,n3), b);
-//        } else {
-//            double damping = (edge->adjf[0]->material->damping +
-//							  edge->adjf[1]->material->damping) * 0.5;
-//            add_submat(-dt*(dt+damping)*J, indices(n0,n1,n2,n3), A);
-//            add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2,n3), b);
-//        }
-//    }
+    for (size_t e = 0; e < edges.size(); e++) {
+        const Edge *edge = edges[e];
+        if (!edge->adjf[0] || !edge->adjf[1])
+            continue;
+        pair<Mat12x12,Vec12> bendF = bending_force<s>(edge);
+        const Node *n0 = edge->n[0],
+                   *n1 = edge->n[1],
+                   *n2 = edge_opp_vert(edge, 0)->node,
+                   *n3 = edge_opp_vert(edge, 1)->node;
+        Vec12 vs = mat_to_vec(Mat3x4(n0->v, n1->v, n2->v, n3->v));
+        Mat12x12 J = bendF.first;
+        Vec12 F = bendF.second;
+
+        if (dt == 0) {
+            add_submat(-J, indices(n0,n1,n2,n3), A);
+            add_subvec(F, indices(n0,n1,n2,n3), b);
+        } else {
+            double damping = (edge->adjf[0]->material->damping +
+							  edge->adjf[1]->material->damping) * 0.5;
+            add_submat(-dt*(dt+damping)*J, indices(n0,n1,n2,n3), A);
+            add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2,n3), b);
+        }
+    }
 }
 template void add_internal_forces<PS> (const vector<Face*>&, const vector<Edge*>&, 
                                        SpMat<Mat3x3> &, vector<Vec3>&, double);

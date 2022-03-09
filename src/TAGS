@@ -478,14 +478,14 @@ struct Pane 62,2401
 	static Pane& plastic(76,2719
     Pane 78,2765
 
-displayphysics.cpp,205
+displayphysics.cpp,206
 static bool running 50,1695
 static void idle 52,1725
 static void keyboard 59,1819
 void display_physics 72,2145
-void display_resume 97,2952
-void display_physics 116,3477
-void display_resume 118,3545
+void display_resume 110,3569
+void display_physics 129,4094
+void display_resume 131,4162
 
 displayphysics.hpp,35
 #define DISPLAYPHYSICS_HPP28,1325
@@ -1051,14 +1051,14 @@ Vec<3,int> indices 272,10203
 Vec<4,int> indices 280,10439
 double internal_energy 291,10773
 void add_internal_forces 307,11324
-double constraint_energy 358,13560
-void add_constraint_forces 368,13811
-void add_friction_forces 404,15186
-vector<Vec3> implicit_update 424,15955
-Vec3 wind_force 475,17617
-void add_external_forces 484,17963
-void add_morph_forces 499,18531
-void project_outside 519,19403
+double constraint_energy 358,13514
+void add_constraint_forces 368,13765
+void add_friction_forces 404,15140
+vector<Vec3> implicit_update 424,15909
+Vec3 wind_force 475,17571
+void add_external_forces 484,17917
+void add_morph_forces 499,18485
+void project_outside 519,19357
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
