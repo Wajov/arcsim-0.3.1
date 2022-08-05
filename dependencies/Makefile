@@ -1,18 +1,6 @@
 .PHONY: all clean clean-subdirs
 
-all: lib/libalglib.a lib/libjson.a lib/libtaucs.a
-
-lib/libalglib.a:
-	cd alglib/cpp/src && g++ -c *.cpp && ar rcs libalglib.a *.o
-	mkdir -p include/alglib/ lib/
-	cp alglib/cpp/src/*.h include/alglib/
-	cp alglib/cpp/src/libalglib.a lib/
-
-lib/libjson.a:
-	cd jsoncpp && scons2 platform=linux-gcc
-	mkdir -p include/json/ lib/
-	cp jsoncpp/include/json/*.h include/json/
-	cp jsoncpp/libs/linux-gcc-*/libjson_linux-gcc-*_libmt.a lib/libjson.a
+all: lib/libtaucs.a
 
 lib/libtaucs.a:
 	cd taucs && ./configure module=\!METIS && $(MAKE)

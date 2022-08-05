@@ -26,7 +26,7 @@
 
 #include "optimization.hpp"
 
-#include "alglib/optimization.h"
+#include "libalglib/optimization.h"
 #include <omp.h>
 #include <vector>
 using namespace std;

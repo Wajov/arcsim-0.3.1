@@ -1,12 +1,12 @@
 
 auglag.cpp,276
-static const NLConOpt *problem;problem35,1441
-static vector<double> lambda;36,1473
-static double mu;37,1503
-void augmented_lagrangian_method 44,1727
-inline double clamp_violation 81,2994
-static void auglag_value_and_grad 84,3111
-static void multiplier_update 115,4275
+static const NLConOpt *problem;problem35,1444
+static vector<double> lambda;36,1476
+static double mu;37,1506
+void augmented_lagrangian_method 44,1730
+inline double clamp_violation 81,2997
+static void auglag_value_and_grad 84,3114
+static void multiplier_update 115,4278
 
 blockvectors.hpp,535
 #define BLOCKVECTORS_HPP28,1323
@@ -672,9 +672,9 @@ io.hpp,48
 void test_state 67,2407
 
 lbfgs.cpp,115
-static const NLOpt *problem;problem35,1441
-void l_bfgs_method 40,1617
-static void lbfgs_value_and_grad 63,2350
+static const NLOpt *problem;problem35,1444
+void l_bfgs_method 40,1620
+static void lbfgs_value_and_grad 63,2353
 
 localopt.cpp,675
 struct LocalOpt:LocalOpt35,1451
@@ -955,9 +955,9 @@ nearobs.hpp,28
 #define NEAROBS_HPP28,1318
 
 nlcg.cpp,136
-static const NLOpt *problem;problem35,1441
-void nonlinear_conjugate_gradient_method 40,1615
-static void nlcg_value_and_grad 63,2398
+static const NLOpt *problem;problem35,1444
+void nonlinear_conjugate_gradient_method 40,1618
+static void nlcg_value_and_grad 63,2401
 
 obstacle.cpp,199
 Mesh& Obstacle::get_mesh(get_mesh35,1422
@@ -1537,14 +1537,14 @@ class MeshSubset 34,1393
 	std::vector<Node*> support_nodes;37,1454
 
 taucs.cpp,412
-vector<Node*>* debug_nodes 36,1476
-ostream &operator<< operator<<49,1948
-taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs68,2530
-template <int m> taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs97,3406
-vector<double> alglib_linear_solve(132,4582
-vector<Vec<C> > alglib_linear_solve_vec(161,5319
-vector<double> taucs_linear_solve 191,6152
-template <int m> vector< Vec<m> > taucs_linear_solve209,6791
+vector<Node*>* debug_nodes 36,1479
+ostream &operator<< operator<<49,1951
+taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs68,2533
+template <int m> taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs97,3409
+vector<double> alglib_linear_solve(132,4585
+vector<Vec<C> > alglib_linear_solve_vec(161,5322
+vector<double> taucs_linear_solve 191,6155
+template <int m> vector< Vec<m> > taucs_linear_solve209,6794
 
 taucs.hpp,26
 #define TAUCS_HPP28,1316

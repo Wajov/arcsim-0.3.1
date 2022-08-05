@@ -27,7 +27,7 @@
 #include "taucs.hpp"
 #include "timer.hpp"
 #include "display.hpp"
-#include "alglib/solvers.h"
+#include "libalglib/solvers.h"
 #include <cstdlib>
 #include <iostream>
 using namespace std;
