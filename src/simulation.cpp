@@ -168,21 +168,21 @@ void advance_step (Simulation &sim) {
     vector<Constraint*> cons = get_constraints(sim, true);
     consistency("init step");
     physics_step(sim, cons);
-    //cout << "phys" << endl;wait_key();
-    consistency("physics");
-//    plasticity_step(sim);
-//    consistency("plasticity");
-//    strainlimiting_step(sim, cons);
-//    consistency("strainlimit");
-//    collision_step(sim);
-//    consistency("collision");
-    //cout << "coll" << endl;wait_key();
-//    if (sim.step % sim.frame_steps == 0) {
-//        remeshing_step(sim);
-//        consistency("remeshing");
-//    	sim.frame++;
-//    }
-    //cout << "rem" << endl;wait_key();
+    // //cout << "phys" << endl;wait_key();
+    // consistency("physics");
+    // plasticity_step(sim);
+    // consistency("plasticity");
+    // strainlimiting_step(sim, cons);
+    // consistency("strainlimit");
+    // collision_step(sim);
+    // consistency("collision");
+    // // cout << "coll" << endl;wait_key();
+    // if (sim.step % sim.frame_steps == 0) {
+    //     remeshing_step(sim);
+    //     consistency("remeshing");
+    //     sim.frame++;
+    // }
+    // //cout << "rem" << endl;wait_key();
     
     delete_constraints(cons);
 }

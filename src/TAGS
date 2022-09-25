@@ -1377,7 +1377,7 @@ struct SplitNode 32,1368
 	SplitNode(38,1448
     bool operator<(39,1555
 
-simulation.cpp,772
+simulation.cpp,773
 bool consistency_check 47,1726
 bool single_step 48,1758
 static const bool verbose 50,1785
@@ -1388,20 +1388,20 @@ void relax_initial_state 104,3853
 void validate_handles 129,4627
 void advance_frame 148,5335
 void advance_step 153,5450
-vector<Constraint*> get_constraints 190,6628
-void delete_constraints 204,7216
-void physics_step 215,7481
-void step_mesh 266,9454
-void plasticity_step 271,9600
-void strainlimiting_step 284,9975
-void equilibration_step 294,10384
-void strainzeroing_step 318,11232
-void collision_step 335,11940
-void remeshing_step 347,12379
-void update_velocities 393,13871
-void update_obstacles 403,14205
-void add_jitter 422,14931
-vector<Vec3> node_positions 431,15256
+vector<Constraint*> get_constraints 190,6655
+void delete_constraints 204,7243
+void physics_step 215,7508
+void step_mesh 266,9481
+void plasticity_step 271,9627
+void strainlimiting_step 284,10002
+void equilibration_step 294,10411
+void strainzeroing_step 318,11259
+void collision_step 335,11967
+void remeshing_step 347,12406
+void update_velocities 393,13898
+void update_obstacles 403,14232
+void add_jitter 422,14958
+vector<Vec3> node_positions 431,15283
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321

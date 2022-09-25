@@ -8,7 +8,7 @@
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
-!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20220828.0/
 AccelStruct	collisionutil.cpp	/^AccelStruct::AccelStruct (const Mesh &mesh, bool ccd):$/;"	f	class:AccelStruct
 AccelStruct	collisionutil.hpp	/^struct AccelStruct {$/;"	s
 Action	main.cpp	/^    struct Action {$/;"	s	function:main	file:
@@ -380,7 +380,7 @@ add_forces	handle.hpp	/^    virtual void add_forces(double t, std::vector<Vec3> 
 add_friction_forces	physics.cpp	/^void add_friction_forces (const vector<Constraint*> cons,$/;"	f	typeref:typename:void
 add_gradient	separate.cpp	/^void add_gradient (const Face *face0, const Edge *edge0, const Face *face1,$/;"	f	typeref:typename:void
 add_impacts	collision.cpp	/^void add_impacts (const vector<Impact> &impacts, vector<ImpactZone*> &zones) {$/;"	f	typeref:typename:void
-add_internal_forces	physics.cpp	/^void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges,$/;"	f	typeref:typename:double internal_energy double internal_energy void
+add_internal_forces	physics.cpp	/^void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges,$/;"	f	typeref:typename:void
 add_jitter	magic.hpp	/^    bool add_jitter;$/;"	m	struct:Magic	typeref:typename:bool
 add_jitter	simulation.cpp	/^void add_jitter (Simulation& sim) { $/;"	f	typeref:typename:void
 add_morph_forces	physics.cpp	/^void add_morph_forces (const Cloth &cloth, const Morph &morph, double t,$/;"	f	typeref:typename:void
@@ -442,7 +442,7 @@ area	geometry.hpp	/^inline double area (const Vec3& u0, const Vec3& u1, const Ve
 area_cached	proximity.cpp	/^double area_cached (const Edge *edge) {$/;"	f	typeref:typename:double
 area_cached	proximity.cpp	/^double area_cached (const Face *face) {$/;"	f	typeref:typename:double
 area_cached	proximity.cpp	/^double area_cached (const Node *node) {$/;"	f	typeref:typename:double
-aspect	geometry.cpp	/^double aspect (const Vec3& u0, const Vec3& u1, const Vec3& u2) {$/;"	f
+aspect	geometry.cpp	/^double aspect (const Vec3& u0, const Vec3& u1, const Vec3& u2) {$/;"	f	typeref:typename:double
 aspect	geometry.hpp	/^inline double aspect (const Face* face) { return aspect(face->v[0]->u, face->v[1]->u, face->v[2]/;"	f	typeref:typename:double
 aspect_min	cloth.hpp	/^    double aspect_min; \/\/ aspect ratio control$/;"	m	struct:Remeshing	typeref:typename:double
 aspect_ratio	display.cpp	/^double aspect_ratio () {$/;"	f	typeref:typename:double
@@ -550,7 +550,7 @@ constraint	collision.cpp	/^double NormalOpt::constraint (const double *x, int j,
 constraint	proxy.cpp	/^Constraint* FloorProxy::constraint(const Node* node) {$/;"	f	class:FloorProxy	typeref:typename:Constraint *
 constraint	separateobs.cpp	/^double SeparationOpt::constraint (const double *x, int j, int &sign) const {$/;"	f	class:SO::SeparationOpt	typeref:typename:double
 constraint	strainlimiting.cpp	/^double SLOpt::constraint (const double *x, int j, int &sign) const {$/;"	f	class:SLOpt	typeref:typename:double
-constraint_energy	physics.cpp	/^double constraint_energy (const vector<Constraint*> &cons) {$/;"	f	typeref:typename:void add_internal_forces void add_internal_forces double
+constraint_energy	physics.cpp	/^double constraint_energy (const vector<Constraint*> &cons) {$/;"	f	typeref:typename:double
 contains	constraint.cpp	/^bool EqCon::contains(Node* _node) { return node == _node; }$/;"	f	class:EqCon	typeref:typename:bool
 contains	constraint.cpp	/^bool GlueCon::contains(Node* _node) { return nodes[0] == _node || nodes[1] == _node; }$/;"	f	class:GlueCon	typeref:typename:bool
 contains	constraint.cpp	/^bool IneqCon::contains(Node *_node) {$/;"	f	class:IneqCon	typeref:typename:bool
@@ -562,7 +562,7 @@ cross	dynamicremesh.cpp	/^double cross (const Vec2 &u, const Vec2 &v) {return u[
 cross	vectors.hpp	/^template <typename T> Vec<3,T> cross (const Vec<3,T> &u, const Vec<3,T> &v) {Vec<3,T> w; w[0] = /;"	f	typeref:typename:Vec<3,T>
 curr_state_mesh	obstacle.hpp	/^    Mesh curr_state_mesh;$/;"	m	struct:Obstacle	typeref:typename:Mesh
 current	display.cpp	/^Pane* Pane::current() { $/;"	f	class:Pane	typeref:typename:Pane *
-curvature	geometry.cpp	/^template <Space s> Mat3x3 curvature (const Face *face) {$/;"	f
+curvature	geometry.cpp	/^template <Space s> Mat3x3 curvature (const Face *face) {$/;"	f	typeref:typename:Mat3x3
 curvature	mesh.hpp	/^    Mat3x3 curvature; \/\/ filtered curvature for bending fracture$/;"	m	struct:Node	typeref:typename:Mat3x3
 d	dde.hpp	/^struct BendingData {double d[3][5];};$/;"	m	struct:BendingData	typeref:typename:double[3][5]
 d	dde.hpp	/^struct StretchingData {Vec4 d[2][5];};$/;"	m	struct:StretchingData	typeref:typename:Vec4[2][5]
@@ -599,7 +599,7 @@ det	vectors.hpp	/^template <typename T> T det (const Mat<3,3,T> &A) {return stp(
 deterministic_sort	dynamicremesh.cpp	/^} deterministic_sort;$/;"	v	typeref:struct:Deterministic_sort
 diag	vectors.hpp	/^template <int n, typename T> MatnnT diag (const VecnT &u) {MatnnT A = MatnnT(0); for (int j = 0;/;"	f	typeref:typename:MatnnT
 diag	vectors.hpp	/^template <int n, typename T> VecnT diag (const MatnnT &A) {VecnT u; for (int j = 0; j < n; j++) /;"	f	typeref:typename:VecnT
-dihedral_angle	geometry.cpp	/^double dihedral_angle (const Vec3& p0, const Vec3& p1, const Vec3& n0, const Vec3& n1) {$/;"	f	typeref:typename:Vec3 normal Vec3 normal double
+dihedral_angle	geometry.cpp	/^double dihedral_angle (const Vec3& p0, const Vec3& p1, const Vec3& n0, const Vec3& n1) {$/;"	f	typeref:typename:double
 dihedral_angle	geometry.cpp	/^template <Space s> double dihedral_angle (const Edge *edge) {$/;"	f	typeref:typename:double
 dilate	bvh.cpp	/^BOX dilate (const BOX &box, double d) {$/;"	f	typeref:typename:BOX
 dir	display.hpp	/^	Vec3 pos, dir;$/;"	m	struct:Annotation	typeref:typename:Vec3
@@ -1104,7 +1104,7 @@ norm2_F	vectors.hpp	/^tpl T norm2_F (const MatmnT &A) {T a = 0; for (int j = 0; 
 norm_F	vectors.hpp	/^tpl T norm_F (const MatmnT &A) {return sqrt(norm2_F(A));}$/;"	f	typeref:typename:tpl T
 normal	display.cpp	/^void normal (const Vec3 &n) {$/;"	f	typeref:typename:void
 normal	geometry.cpp	/^template <Space s> Vec3 normal (const Face *face) {$/;"	f	typeref:typename:Vec3
-normal	geometry.cpp	/^template <Space s> Vec3 normal (const Node* node) {$/;"	f
+normal	geometry.cpp	/^template <Space s> Vec3 normal (const Node* node) {$/;"	f	typeref:typename:Vec3
 normal	sepstrength.hpp	/^	Vec3 normal[2];$/;"	m	struct:SplitNode	typeref:typename:Vec3[2]
 normalize	handle.cpp	/^Transformation normalize (const Transformation &T) {$/;"	f	typeref:typename:Transformation
 normalize	transformation.cpp	/^Quaternion normalize (const Quaternion &q) {$/;"	f	typeref:typename:Quaternion
@@ -1138,7 +1138,7 @@ obs_meshes	collisionutil.cpp	/^const vector<Mesh*> *meshes, *obs_meshes;$/;"	v	t
 obstacle_meshes	simulation.hpp	/^    std::vector<Mesh*> cloth_meshes, obstacle_meshes;$/;"	m	struct:Simulation	typeref:typename:std::vector<Mesh * >
 obstacle_metric	dynamicremesh.cpp	/^Mat3x3 obstacle_metric (const Face *face, const map<Node*,Plane> &planes) {$/;"	f	typeref:typename:Mat3x3
 obstacles	simulation.hpp	/^    std::vector<Obstacle> obstacles;$/;"	m	struct:Simulation	typeref:typename:std::vector<Obstacle>
-obtain_subframe_id	io.cpp	/^string obtain_subframe_id() {$/;"	f	typeref:typename:bool load_state void save_state string
+obtain_subframe_id	io.cpp	/^string obtain_subframe_id() {$/;"	f	typeref:typename:string
 offline_loop	runphysics.cpp	/^void offline_loop() {$/;"	f	typeref:typename:void
 offset	display.hpp	/^    Vec2 offset;$/;"	m	struct:Pane	typeref:typename:Vec2
 opengl_fail	opengl.hpp	/^inline void opengl_fail () {$/;"	f	typeref:typename:void
@@ -1330,7 +1330,7 @@ project	vectors.hpp	/^template <int m, int n, typename T> Vec<m,T> project (cons
 project	vectors.hpp	/^template <int m1, int n1, int m2, int n2, typename T> Mat<m1,n1,T> project (const Mat<m2,n2,T> &/;"	f	typeref:typename:Mat<m1,n1,T>
 project_outside	physics.cpp	/^void project_outside (vector<Node*>& nodes, const vector<Constraint*> &cons) {$/;"	f	typeref:typename:void
 project_vertex	remesh.cpp	/^void project_vertex(Vert *vnew, Edge* edge, int s, double d) {$/;"	f	typeref:typename:void
-projected_curvature	geometry.cpp	/^template <Space s> Mat2x2 projected_curvature (const Face *face, const Mat2x3& base) {$/;"	f	typeref:typename:double dihedral_angle double dihedral_angle double dihedral_angle Mat2x2
+projected_curvature	geometry.cpp	/^template <Space s> Mat2x2 projected_curvature (const Face *face, const Mat2x3& base) {$/;"	f	typeref:typename:Mat2x2
 projection_thickness	magic.hpp	/^    double repulsion_thickness, projection_thickness;$/;"	m	struct:Magic	typeref:typename:double
 proximity	simulation.cpp	/^static const int proximity = Simulation::Proximity,$/;"	v	typeref:typename:const int	file:
 proximity_constraints	proximity.cpp	/^vector<Constraint*> proximity_constraints (vector<Mesh*> &meshes,$/;"	f	typeref:typename:vector<Constraint * >
@@ -1460,7 +1460,7 @@ serializer	proximity.cpp	/^template<> void serializer<vector<Min<Face*> > >(vect
 serializer	proximity.cpp	/^template<> void serializer<vector<Min<Node*> > >(vector<Min<Node*> >& x, Serialize& s, const str/;"	f	typeref:typename:void
 serializer	util.cpp	/^template<> void serializer<Mat2x2>(Mat2x2& x, Serialize& s,const string& n) { return serializer_/;"	f	typeref:typename:void
 serializer	util.cpp	/^template<> void serializer<Mat3x3>(Mat3x3& x, Serialize& s,const string& n) { return serializer_/;"	f	typeref:typename:void
-serializer	util.cpp	/^template<> void serializer<Vec2>(Vec2& x, Serialize& s,const string& n) { return serializer_vec(/;"	f	typeref:typename:void serializer void serializer void serializer void
+serializer	util.cpp	/^template<> void serializer<Vec2>(Vec2& x, Serialize& s,const string& n) { return serializer_vec(/;"	f	typeref:typename:void
 serializer	util.cpp	/^template<> void serializer<Vec3>(Vec3& x, Serialize &s,const string& n) { return serializer_vec(/;"	f	typeref:typename:void
 serializer	util.cpp	/^template<> void serializer<vector<Vec3> >(vector<Vec3>& x, Serialize& s, const string& n) { retu/;"	f	typeref:typename:void
 serializer	util.cpp	/^template<> void serializer<vector<double> >(vector<double>& x, Serialize& s, const string& n) { /;"	f	typeref:typename:void
@@ -1504,7 +1504,7 @@ solve_cubic	collision.cpp	/^int solve_cubic (double a, double b, double c, doubl
 solve_ixns	separateobs.cpp	/^void solve_ixns (const vector<Ixn> &ixns) {$/;"	f	namespace:SO	typeref:typename:void
 solve_llsq	vectors.cpp	/^template <int m, int n> Vec<n> solve_llsq(const Mat<m,n> &A, const Vec<m>& b) {$/;"	f	typeref:typename:Vec<n>
 solve_quadratic	util.cpp	/^int solve_quadratic (double a, double b, double c, double x[2]) {$/;"	f	typeref:typename:int
-solve_symmetric	vectors.cpp	/^template<> Vec2 solve_symmetric(const Mat2x2& A, const Vec2& b) {$/;"	f
+solve_symmetric	vectors.cpp	/^template<> Vec2 solve_symmetric(const Mat2x2& A, const Vec2& b) {$/;"	f	typeref:typename:Vec2
 solve_symmetric	vectors.cpp	/^template<> Vec3 solve_symmetric(const Mat3x3& A, const Vec3& b) {$/;"	f	typeref:typename:Vec3
 sort	util.cpp	/^void Stats::sort () const {$/;"	f	class:Stats	typeref:typename:void
 sorted	util.hpp	/^    mutable bool sorted;$/;"	m	struct:Stats	typeref:typename:bool
@@ -1591,7 +1591,7 @@ transpose	blockvectors.hpp	/^template <int m, int n> Mat<m*n,m*n,double> transpo
 transpose	vectors.hpp	/^tpl MatnmT transpose (const MatmnT &A) {MatnmT B; for (int i = 0; i < m; i++) for (int j = 0; j /;"	f	typeref:typename:tpl MatnmT
 tree	collisionutil.hpp	/^    BVHTree tree;$/;"	m	struct:AccelStruct	typeref:typename:BVHTree
 tri2obj	misc.cpp	/^void tri2obj (const vector<string> &args) {$/;"	f	typeref:typename:void
-triangle_ray_test	geometry.cpp	/^bool triangle_ray_test (const Vec3 &x0, const Vec3& x1, const Vec3& x2,$/;"	f	typeref:typename:Plane plane_fit Plane plane_fit bool
+triangle_ray_test	geometry.cpp	/^bool triangle_ray_test (const Vec3 &x0, const Vec3& x1, const Vec3& x2,$/;"	f	typeref:typename:bool
 triangle_to_obj	io.cpp	/^void triangle_to_obj (const string &inname, const string &outname) {$/;"	f	typeref:typename:void
 triangulate	io.cpp	/^vector<Face*> triangulate (const vector<Vert*> &verts) {$/;"	f	typeref:typename:vector<Face * >
 trust_region_method	trustregion.cpp	/^void trust_region_method (const NLOpt &problem, OptOptions opt, bool verbose) {$/;"	f	typeref:typename:void

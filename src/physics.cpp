@@ -443,10 +443,10 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
     consistency(b, "init");
     add_internal_forces<WS>(faces, edges, A, b, dt);
     consistency(b, "internal forces");
-//    add_friction_forces(cons, A, b, dt);
-//    consistency(b, "friction");
-    add_constraint_forces(cons, A, b, dt);
-    consistency(b, "constraints");
+    // add_friction_forces(cons, A, b, dt);
+    // consistency(b, "friction");
+    // add_constraint_forces(cons, A, b, dt);
+    // consistency(b, "constraints");
 
     std::ofstream fout("../ClothSimulator/standard.txt");
     fout.precision(20);
