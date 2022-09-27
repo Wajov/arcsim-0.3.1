@@ -81,6 +81,14 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "core": "cpp"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/wajov/Projects/arcsim-0.3.1/bin",
+            "binaryPath": "/home/wajov/Projects/arcsim-0.3.1/bin/arcsim",
+            "binaryArgs": []
+        }
+    ]
 }

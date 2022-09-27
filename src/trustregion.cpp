@@ -26,7 +26,7 @@
 
 #include "optimization.hpp"
 
-#include "taucs.hpp"
+#include "solver.hpp"
 #include "util.hpp"
 
 using namespace std;
@@ -95,7 +95,7 @@ bool minimize_in_ball (const vector<double> &g, const SpMat<double> &H,
     //int n = g.size();
     static vector<double> p1, p2;
     scalar_mult(p1, -dot(g, g)/dot(g, H, g), g);
-    p2 = taucs_linear_solve(H, g);
+    p2 = linear_solve(H, g);
     scalar_mult(p2, -1, p2);
     double n1 = norm(p1), n2 = norm(p2);
     if (n2 < radius) {

@@ -29,7 +29,7 @@
 #include "blockvectors.hpp"
 #include "collisionutil.hpp"
 #include "sparse.hpp"
-#include "taucs.hpp"
+#include "solver.hpp"
 #include "io.hpp"
 #include "display.hpp"
 
@@ -37,7 +37,6 @@ using namespace std;
 
 static const bool verbose = false;
 extern bool consistency_check;
-extern vector<Node*>* debug_nodes;
 
 static void consistency(vector<Vec3>& b, const string& name) {
 	if (consistency_check) {
@@ -445,8 +444,8 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
     consistency(b, "internal forces");
     // add_friction_forces(cons, A, b, dt);
     // consistency(b, "friction");
-    // add_constraint_forces(cons, A, b, dt);
-    // consistency(b, "constraints");
+    add_constraint_forces(cons, A, b, dt);
+    consistency(b, "constraints");
 
     std::ofstream fout("../ClothSimulator/standard.txt");
     fout.precision(20);
@@ -464,10 +463,8 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
     fout << std::endl;
     fout.close();
 
-    ::debug_nodes = &nodes;
-    vector<Vec3> dv = taucs_linear_solve(A, b);
-    ::debug_nodes = 0;
-    consistency(dv, "taucs");
+    vector<Vec3> dv = linear_solve(A, b);
+    consistency(dv, "solver");
 
     return dv;    
 }

@@ -4,13 +4,13 @@ CXX := g++
 # # uncomment to disable OpenGL functionality
 # NO_OPENGL := true
 
-CXXFLAGS := -Idependencies/include -I/usr/include -std=c++14
+CXXFLAGS := -Idependencies/include -I/usr/include -I/usr/include/eigen3 -std=c++14
 ifdef NO_OPENGL
 	CXXFLAGS := $(CXXFLAGS) -DNO_OPENGL
 endif
 CXXFLAGS_DEBUG := -Wall -g -Wno-sign-compare
 CXXFLAGS_RELEASE := -Wall -O3 -Wreturn-type -fopenmp
-LDFLAGS := -Ldependencies/lib -L/usr/lib -lpng -lz -ltaucs -llapacke -llapack -lblas -lboost_filesystem -lboost_system -lboost_thread -ljsoncpp -lgomp -lalglib
+LDFLAGS := -Ldependencies/lib -L/usr/lib -lpng -lz -llapacke -llapack -lblas -lboost_filesystem -lboost_system -lboost_thread -ljsoncpp -lgomp -lalglib
 ifndef NO_OPENGL
 	LDFLAGS := $(LDFLAGS) -lglut -lGLU -lGL
 endif
@@ -60,7 +60,7 @@ OBJ := \
 	spline.o \
 	strainlimiting.o \
 	subset.o \
-	taucs.o \
+	sovler.o \
 	tensormax.o \
 	timer.o \
 	transformation.o \

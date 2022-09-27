@@ -110,7 +110,7 @@ void relax_initial_state (Simulation &sim) {
     bool equilibrate = true;
     if (equilibrate) {
         equilibration_step(sim);
-//        remeshing_step(sim, true);
+        remeshing_step(sim, true);
         equilibration_step(sim);
     } else {
         remeshing_step(sim, true);
@@ -168,8 +168,8 @@ void advance_step (Simulation &sim) {
     vector<Constraint*> cons = get_constraints(sim, true);
     consistency("init step");
     physics_step(sim, cons);
-    // //cout << "phys" << endl;wait_key();
-    // consistency("physics");
+    //cout << "phys" << endl;wait_key();
+    consistency("physics");
     // plasticity_step(sim);
     // consistency("plasticity");
     // strainlimiting_step(sim, cons);

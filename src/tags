@@ -244,6 +244,7 @@ SIMULATION_HPP	simulation.hpp	/^#define SIMULATION_HPP$/;"	d
 SLOpt	strainlimiting.cpp	/^    SLOpt (vector<Mesh*> &meshes, const vector<StrainLimit> &strain_limits,$/;"	f	struct:SLOpt	file:
 SLOpt	strainlimiting.cpp	/^struct SLOpt: public NLConOpt {$/;"	s	file:
 SO	separateobs.cpp	/^namespace SO {$/;"	n	file:
+SOLVER_HPP	solver.hpp	/^#define SOLVER_HPP$/;"	d
 SPARSE_HPP	sparse.hpp	/^#define SPARSE_HPP$/;"	d
 SPLINE_HPP	spline.hpp	/^#define SPLINE_HPP$/;"	d
 STRAINLIMITING_HPP	strainlimiting.hpp	/^#define STRAINLIMITING_HPP$/;"	d
@@ -280,7 +281,6 @@ StrainLimit	strainlimiting.hpp	/^struct StrainLimit {$/;"	s
 StrainLimiting	simulation.hpp	/^    enum {Proximity, Physics, StrainLimiting, Collision, Remeshing, Separation,$/;"	e	enum:Simulation::__anon8619f0600103
 StretchingData	dde.hpp	/^struct StretchingData {Vec4 d[2][5];};$/;"	s
 StretchingSamples	dde.hpp	/^struct StretchingSamples {Vec4 s[40][40][40];};$/;"	s
-TAUCS_HPP	taucs.hpp	/^#define TAUCS_HPP$/;"	d
 TENSORMAX_HPP	tensormax.hpp	/^#define TENSORMAX_HPP$/;"	d
 TRANSFORMATION_HPP	transformation.hpp	/^#define TRANSFORMATION_HPP$/;"	d
 TRANSLATE	display.cpp	/^    enum {ROTATE, TRANSLATE, SCALE} func;$/;"	e	enum:MouseState::__anonc1288a8c0103	file:
@@ -408,8 +408,6 @@ adjf	mesh.hpp	/^    Face *adjf[2]; \/\/ adjacent faces$/;"	m	struct:Edge	typeref
 adjf	mesh.hpp	/^    std::vector<Face*> adjf; \/\/ adjacent faces$/;"	m	struct:Vert	typeref:typename:std::vector<Face * >
 advance_frame	simulation.cpp	/^void advance_frame (Simulation &sim) {$/;"	f	typeref:typename:void
 advance_step	simulation.cpp	/^void advance_step (Simulation &sim) {$/;"	f	typeref:typename:void
-alglib_linear_solve	taucs.cpp	/^vector<double> alglib_linear_solve(const SpMat<double>& A, const vector<double>& b) {$/;"	f	typeref:typename:vector<double>
-alglib_linear_solve_vec	taucs.cpp	/^vector<Vec<C> > alglib_linear_solve_vec(const SpMat<Mat<C,C> >& A, const vector<Vec<C> >& b) {$/;"	f	typeref:typename:vector<Vec<C>>
 aligned_free	vectors.hpp	/^inline void aligned_free(void *ptr)    { _aligned_free(ptr); }$/;"	f	typeref:typename:void
 aligned_free	vectors.hpp	/^inline void aligned_free(void *ptr)    { free(ptr); }$/;"	f	typeref:typename:void
 alt_bending	cloth.hpp	/^    double alt_stretching, alt_bending, alt_poisson; \/\/ alternative material model$/;"	m	struct:Material	typeref:typename:double
@@ -576,7 +574,6 @@ deactivate_nodes	mesh.cpp	/^void deactivate_nodes(vector<Node*>& nodes) {$/;"	f	
 debug	strainlimiting.cpp	/^void debug (const vector<string> &args) {$/;"	f	typeref:typename:void
 debug	subset.cpp	/^void MeshSubset::debug() {$/;"	f	class:MeshSubset	typeref:typename:void
 debug_color	display.cpp	/^Vec3 debug_color (Face *face, const Vert* vert) {$/;"	f	typeref:typename:Vec3
-debug_nodes	taucs.cpp	/^vector<Node*>* debug_nodes = 0;$/;"	v	typeref:typename:vector<Node * > *
 debug_save_mesh	util.cpp	/^void debug_save_mesh (const Mesh &mesh, const string &name, int n) {$/;"	f	typeref:typename:void
 debug_save_meshes	util.cpp	/^void debug_save_meshes (const vector<Mesh*> &meshvec, const string &name,$/;"	f	typeref:typename:void
 debug_save_spmat	sparse.hpp	/^inline void debug_save_spmat (const SpMat<double> &A) {$/;"	f	typeref:typename:void
@@ -958,6 +955,8 @@ length	bvh.hpp	/^	FORCEINLINE float length(int i) const {$/;"	f	class:kDOP18	typ
 line_circle_intersection	trustregion.cpp	/^double line_circle_intersection (double n1, double n2, double d, double r) {$/;"	f	typeref:typename:double
 line_search	lsnewton.cpp	/^double line_search (const vector<double> &x0, const vector<double> &p,$/;"	f	typeref:typename:double
 line_search_newtons_method	lsnewton.cpp	/^void line_search_newtons_method (const NLOpt &problem, OptOptions opt,$/;"	f	typeref:typename:void
+linear_solve	sovler.cpp	/^std::vector<Vec3> linear_solve(const SpMat<Mat3x3>& A, const std::vector<Vec3>& b) {$/;"	f	typeref:typename:std::vector<Vec3>
+linear_solve	sovler.cpp	/^std::vector<double> linear_solve(const SpMat<double>& A, const std::vector<double>& b) {$/;"	f	typeref:typename:std::vector<double>
 list	display.cpp	/^vector<Annotation> Annotation::list;$/;"	m	class:Annotation	typeref:typename:vector<Annotation>
 list	display.hpp	/^	static std::vector<Annotation> list;$/;"	m	struct:Annotation	typeref:typename:std::vector<Annotation>
 load	util.hpp	/^	bool load() { return mode == Load; }$/;"	f	struct:Serialize	typeref:typename:bool
@@ -1206,7 +1205,6 @@ operator <<	remesh.cpp	/^ostream &operator<< (ostream &out, const RemeshOp &op) 
 operator <<	separateobs.cpp	/^ostream &operator<< (ostream &out, const Ixn &ixn) {out << ixn.f0 << "@" << ixn.b0 << " " << ixn/;"	f	namespace:SO	typeref:typename:ostream &
 operator <<	sparse.hpp	/^std::ostream &operator<< (std::ostream &out, const SpMat<T> &A) {$/;"	f	typeref:typename:std::ostream &
 operator <<	sparse.hpp	/^std::ostream &operator<< (std::ostream &out, const SpVec<T> &v) {$/;"	f	typeref:typename:std::ostream &
-operator <<	taucs.cpp	/^ostream &operator<< (ostream &out, taucs_ccs_matrix *A) {$/;"	f	typeref:typename:ostream &
 operator <<	tensormax.cpp	/^ostream &operator<< (ostream &out, const Disk &disk) {out << "Circle[{" << disk.c[0] << "," << d/;"	f	typeref:typename:ostream &
 operator <<	transformation.hpp	/^inline std::ostream &operator<< (std::ostream &out, const Quaternion &q) {out << "(" << q.s << "/;"	f	typeref:typename:std::ostream &
 operator <<	transformation.hpp	/^inline std::ostream &operator<< (std::ostream &out, const Transformation &t) {out << "(translati/;"	f	typeref:typename:std::ostream &
@@ -1500,6 +1498,7 @@ size_min	cloth.hpp	/^    double size_min, size_max, size_uniform; \/\/ size limi
 size_uniform	cloth.hpp	/^    double size_min, size_max, size_uniform; \/\/ size limits$/;"	m	struct:Remeshing	typeref:typename:double
 sizing	mesh.hpp	/^    Mat3x3 sizing;$/;"	m	struct:Vert	typeref:typename:Mat3x3
 snprintf	winport.hpp	/^#define snprintf /;"	d
+solve	sovler.cpp	/^Eigen::VectorXd solve(const Eigen::SparseMatrix<double>& A, const Eigen::VectorXd& b) {$/;"	f	typeref:typename:Eigen::VectorXd
 solve_cubic	collision.cpp	/^int solve_cubic (double a, double b, double c, double d, double x[3]) {$/;"	f	typeref:typename:int
 solve_ixns	separateobs.cpp	/^void solve_ixns (const vector<Ixn> &ixns) {$/;"	f	namespace:SO	typeref:typename:void
 solve_llsq	vectors.cpp	/^template <int m, int n> Vec<n> solve_llsq(const Mat<m,n> &A, const Vec<m>& b) {$/;"	f	typeref:typename:Vec<n>
@@ -1508,8 +1507,6 @@ solve_symmetric	vectors.cpp	/^template<> Vec2 solve_symmetric(const Mat2x2& A, c
 solve_symmetric	vectors.cpp	/^template<> Vec3 solve_symmetric(const Mat3x3& A, const Vec3& b) {$/;"	f	typeref:typename:Vec3
 sort	util.cpp	/^void Stats::sort () const {$/;"	f	class:Stats	typeref:typename:void
 sorted	util.hpp	/^    mutable bool sorted;$/;"	m	struct:Stats	typeref:typename:bool
-sparse_to_taucs	taucs.cpp	/^taucs_ccs_matrix *sparse_to_taucs (const SpMat<double> &As) {$/;"	f	typeref:typename:taucs_ccs_matrix *
-sparse_to_taucs	taucs.cpp	/^template <int m> taucs_ccs_matrix *sparse_to_taucs (const SpMat< Mat<m,m> > &As) {$/;"	f	typeref:typename:taucs_ccs_matrix *
 special	display.hpp	/^    void (*special) (int, int, int);$/;"	m	struct:GlutCallbacks	typeref:typename:void (*)(int,int,int)
 special	displayreplay.cpp	/^static void special (int key, int x, int y) {$/;"	f	typeref:typename:void	file:
 split_edge	remesh.cpp	/^RemeshOp split_edge (Edge* edge, double d) {$/;"	f	typeref:typename:RemeshOp
@@ -1565,8 +1562,6 @@ t0	sepstrength.cpp	/^	Vec3 t0, t1;$/;"	m	struct:FanPrecomp	typeref:typename:Vec3
 t1	sepstrength.cpp	/^	Vec3 t0, t1;$/;"	m	struct:FanPrecomp	typeref:typename:Vec3	file:
 tail	tensormax.cpp	/^template <typename T> vector<T> tail (const vector<T> &v) {$/;"	f	typeref:typename:vector<T>
 targets	morph.hpp	/^    std::vector<Mesh> targets;$/;"	m	struct:Morph	typeref:typename:std::vector<Mesh>
-taucs_linear_solve	taucs.cpp	/^template <int m> vector< Vec<m> > taucs_linear_solve$/;"	f	typeref:typename:vector<Vec<m>>
-taucs_linear_solve	taucs.cpp	/^vector<double> taucs_linear_solve (const SpMat<double> &A, const vector<double> &b) {$/;"	f	typeref:typename:vector<double>
 tensor_max	tensormax.cpp	/^Mat2x2 tensor_max (const vector<Mat2x2> &Ms) {$/;"	f	typeref:typename:Mat2x2
 test_state	io.hpp	/^void test_state (T& state, const std::string& prefix) {$/;"	f	typeref:typename:void
 then	timer.hpp	/^    boost::posix_time::ptime then;$/;"	m	struct:Timer	typeref:typename:boost::posix_time::ptime

@@ -699,14 +699,14 @@ localopt.hpp,26
 #define LOCALOPT_HPP2,21
 
 lsnewton.cpp,240
-static bool verbose;34,1391
-static double norm 43,1866
-void line_search_newtons_method 45,1937
-inline double cb 86,3177
-double line_search 88,3222
-static void add 133,4640
-static void scalar_mult 141,4883
-static double dot 148,5061
+static bool verbose;34,1392
+static double norm 43,1867
+void line_search_newtons_method 45,1938
+inline double cb 86,3172
+double line_search 88,3217
+static void add 133,4635
+static void scalar_mult 141,4878
+static double dot 148,5056
 
 magic.cpp,21
 Magic magic;29,1320
@@ -1015,50 +1015,50 @@ inline Mat3x3 get_submat 115,4861
 inline void set_submat 121,5061
 inline void add_submat 125,5246
 
-physics.cpp,1507
-static const bool verbose 38,1486
-static void consistency(42,1588
-typedef Mat<9,9> Mat9x9;49,1750
-typedef Mat<9,6> Mat9x6;50,1775
-typedef Mat<6,6> Mat6x6;51,1800
-typedef Mat<4,6> Mat4x6;52,1825
-typedef Mat<3,4> Mat3x4;53,1850
-typedef Mat<4,9> Mat4x9;54,1875
-typedef Vec<9> Vec9;55,1900
-template <int m,61,2106
-template <int m, int n,61,2106
-template <int m, int n, int p,61,2106
-Mat<m*p,n*q> kronecker 62,2144
-template <int m> Mat<m,1> colmat 72,2449
-template <int n> Mat<1,n> rowmat 74,2572
-Mat3x3 deformation_gradient 78,2715
-Mat3x3 material_model 83,2929
-double stretching_energy 100,3625
-pair<Mat9x9,Vec9> stretching_force 109,3873
-typedef Mat<12,12> Mat12x12;173,6859
-typedef Vec<12> Vec12;174,6888
-double bending_coeff(176,6912
-double bending_energy 195,7667
-double distance 203,7891
-Vec2 barycentric_weights 210,8090
-pair<Mat12x12,Vec12> bending_force 217,8265
-template <int m,240,9302
-template <int m, int n> Mat<3,3> submat3 240,9302
-template <int n> Vec<3> subvec3 248,9525
-template <int m> void add_submat 255,9679
-template <int m> void add_subvec 265,9992
-Vec<3,int> indices 272,10203
-Vec<4,int> indices 280,10439
-double internal_energy 291,10773
-void add_internal_forces 307,11324
-double constraint_energy 358,13514
-void add_constraint_forces 368,13765
-void add_friction_forces 404,15140
-vector<Vec3> implicit_update 424,15909
-Vec3 wind_force 475,17571
-void add_external_forces 484,17917
-void add_morph_forces 499,18485
-void project_outside 519,19357
+physics.cpp,1506
+static const bool verbose 38,1487
+static void consistency(41,1554
+typedef Mat<9,9> Mat9x9;48,1716
+typedef Mat<9,6> Mat9x6;49,1741
+typedef Mat<6,6> Mat6x6;50,1766
+typedef Mat<4,6> Mat4x6;51,1791
+typedef Mat<3,4> Mat3x4;52,1816
+typedef Mat<4,9> Mat4x9;53,1841
+typedef Vec<9> Vec9;54,1866
+template <int m,60,2072
+template <int m, int n,60,2072
+template <int m, int n, int p,60,2072
+Mat<m*p,n*q> kronecker 61,2110
+template <int m> Mat<m,1> colmat 71,2415
+template <int n> Mat<1,n> rowmat 73,2538
+Mat3x3 deformation_gradient 77,2681
+Mat3x3 material_model 82,2895
+double stretching_energy 99,3591
+pair<Mat9x9,Vec9> stretching_force 108,3839
+typedef Mat<12,12> Mat12x12;172,6825
+typedef Vec<12> Vec12;173,6854
+double bending_coeff(175,6878
+double bending_energy 194,7633
+double distance 202,7857
+Vec2 barycentric_weights 209,8056
+pair<Mat12x12,Vec12> bending_force 216,8231
+template <int m,239,9268
+template <int m, int n> Mat<3,3> submat3 239,9268
+template <int n> Vec<3> subvec3 247,9491
+template <int m> void add_submat 254,9645
+template <int m> void add_subvec 264,9958
+Vec<3,int> indices 271,10169
+Vec<4,int> indices 279,10405
+double internal_energy 290,10739
+void add_internal_forces 306,11290
+double constraint_energy 357,13480
+void add_constraint_forces 367,13731
+void add_friction_forces 403,15106
+vector<Vec3> implicit_update 423,15875
+Vec3 wind_force 472,17483
+void add_external_forces 481,17829
+void add_morph_forces 496,18397
+void project_outside 516,19269
 
 physics.hpp,28
 #define PHYSICS_HPP28,1318
@@ -1093,23 +1093,23 @@ plasticity.hpp,31
 #define PLASTICITY_HPP28,1321
 
 popfilter.cpp,607
-static double mu;37,1539
-struct PopOpt:PopOpt39,1558
-    Cloth &cloth;cloth46,1860
-    Mesh &mesh;mesh47,1878
-    const vector<Constraint*> &cons;cons48,1894
-    vector<Vec3> x0,49,1931
-    vector<Vec3> x0, a0;49,1931
-    mutable vector<Vec3> f;50,1956
-    mutable SpMat<Mat3x3> J;51,1984
-    PopOpt 52,2013
-void apply_pop_filter 76,2848
-void PopOpt::initialize initialize89,3332
-void PopOpt::precompute precompute94,3465
-double PopOpt::objective objective105,3882
-void PopOpt::gradient gradient118,4369
-bool PopOpt::hessian hessian126,4631
-void PopOpt::finalize finalize139,5055
+static double mu;36,1518
+struct PopOpt:PopOpt38,1537
+    Cloth &cloth;cloth45,1839
+    Mesh &mesh;mesh46,1857
+    const vector<Constraint*> &cons;cons47,1873
+    vector<Vec3> x0,48,1910
+    vector<Vec3> x0, a0;48,1910
+    mutable vector<Vec3> f;49,1935
+    mutable SpMat<Mat3x3> J;50,1963
+    PopOpt 51,1992
+void apply_pop_filter 75,2827
+void PopOpt::initialize initialize88,3311
+void PopOpt::precompute precompute93,3444
+double PopOpt::objective objective104,3861
+void PopOpt::gradient gradient117,4348
+bool PopOpt::hessian hessian125,4610
+void PopOpt::finalize finalize138,5034
 
 popfilter.hpp,30
 #define POPFILTER_HPP28,1320
@@ -1377,7 +1377,7 @@ struct SplitNode 32,1368
 	SplitNode(38,1448
     bool operator<(39,1555
 
-simulation.cpp,773
+simulation.cpp,772
 bool consistency_check 47,1726
 bool single_step 48,1758
 static const bool verbose 50,1785
@@ -1385,23 +1385,23 @@ static const int proximity 51,1820
 static void consistency(71,2722
 void prepare 82,2945
 void relax_initial_state 104,3853
-void validate_handles 129,4627
-void advance_frame 148,5335
-void advance_step 153,5450
-vector<Constraint*> get_constraints 190,6655
-void delete_constraints 204,7243
-void physics_step 215,7508
-void step_mesh 266,9481
-void plasticity_step 271,9627
-void strainlimiting_step 284,10002
-void equilibration_step 294,10411
-void strainzeroing_step 318,11259
-void collision_step 335,11967
-void remeshing_step 347,12406
-void update_velocities 393,13898
-void update_obstacles 403,14232
-void add_jitter 422,14958
-vector<Vec3> node_positions 431,15283
+void validate_handles 129,4625
+void advance_frame 148,5333
+void advance_step 153,5448
+vector<Constraint*> get_constraints 190,6647
+void delete_constraints 204,7235
+void physics_step 215,7500
+void step_mesh 266,9473
+void plasticity_step 271,9619
+void strainlimiting_step 284,9994
+void equilibration_step 294,10403
+void strainzeroing_step 318,11251
+void collision_step 335,11959
+void remeshing_step 347,12398
+void update_velocities 393,13890
+void update_obstacles 403,14224
+void add_jitter 422,14950
+vector<Vec3> node_positions 431,15275
 
 simulation.hpp,1533
 #define SIMULATION_HPP28,1321
@@ -1443,6 +1443,14 @@ struct Simulation 47,1631
     Timer timers[timers67,2243
     std::vector<Mesh*> cloth_meshes,69,2293
     std::vector<Mesh*> cloth_meshes, obstacle_meshes;69,2293
+
+solver.hpp,24
+#define SOLVER_HPP2,19
+
+sovler.cpp,108
+Eigen::VectorXd solve(3,23
+std::vector<Vec3> linear_solve(9,233
+std::vector<double> linear_solve(33,1022
 
 sparse.hpp,606
 #define SPARSE_HPP28,1317
@@ -1536,19 +1544,6 @@ class MeshSubset 34,1393
 	std::vector<Node*> active_nodes;36,1420
 	std::vector<Node*> support_nodes;37,1454
 
-taucs.cpp,412
-vector<Node*>* debug_nodes 36,1479
-ostream &operator<< operator<<49,1951
-taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs68,2533
-template <int m> taucs_ccs_matrix *sparse_to_taucs sparse_to_taucs97,3409
-vector<double> alglib_linear_solve(132,4585
-vector<Vec<C> > alglib_linear_solve_vec(161,5322
-vector<double> taucs_linear_solve 191,6155
-template <int m> vector< Vec<m> > taucs_linear_solve209,6794
-
-taucs.hpp,26
-#define TAUCS_HPP28,1316
-
 tensormax.cpp,495
 struct Disk 31,1365
     Vec2 c;32,1379
@@ -1631,15 +1626,15 @@ typedef std::pair<Transformation,Transformation73,3008
 typedef std::pair<Transformation,Transformation> DTransformation;73,3008
 
 trustregion.cpp,278
-void trust_region_method 51,2142
-bool minimize_in_ball 93,3620
-double line_circle_intersection 115,4293
-static void add 124,4590
-static void add 133,4841
-static void scalar_mult 142,5116
-static double dot 150,5319
-static double dot 159,5543
-static double norm 177,6064
+void trust_region_method 51,2143
+bool minimize_in_ball 93,3621
+double line_circle_intersection 115,4288
+static void add 124,4585
+static void add 133,4836
+static void scalar_mult 142,5111
+static double dot 150,5314
+static double dot 159,5538
+static double norm 177,6059
 
 util.cpp,1260
 void Stats::add add40,1527
