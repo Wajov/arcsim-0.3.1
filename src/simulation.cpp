@@ -174,8 +174,8 @@ void advance_step (Simulation &sim) {
     // consistency("plasticity");
     // strainlimiting_step(sim, cons);
     // consistency("strainlimit");
-    // collision_step(sim);
-    // consistency("collision");
+    collision_step(sim);
+    consistency("collision");
     // // cout << "coll" << endl;wait_key();
     // if (sim.step % sim.frame_steps == 0) {
     //     remeshing_step(sim);
