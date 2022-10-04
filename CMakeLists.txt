@@ -56,7 +56,9 @@ target_link_libraries(
         ${GLUT_LIBRARIES}
         ${JSONCPP_LIBRARIES}
         ${BLAS_LIBRARIES}
+        cblas
         ${LAPACK_LIBRARIES}
+        lapacke
         alglib
         Boost::system
         Boost::filesystem
