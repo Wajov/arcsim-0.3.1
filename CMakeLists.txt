@@ -31,7 +31,7 @@ endif()
 find_package(PNG REQUIRED)
 
 # Eigen
-find_package(Eigen3)
+find_package(Eigen3 REQUIRED)
 
 # ALGLIB
 add_subdirectory(lib/alglib)
