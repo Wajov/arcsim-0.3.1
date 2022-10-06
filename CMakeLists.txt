@@ -47,7 +47,6 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}
 
 include_directories(
         ${OPENGL_INCLUDE_DIRS}
-        ${GLUT_INCLUDE_DIRS}
         ${PNG_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIR}
         ${Boost_INCLUDE_DIRS}
