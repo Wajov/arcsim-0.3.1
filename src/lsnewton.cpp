@@ -26,7 +26,7 @@
 
 #include "optimization.hpp"
 
-#include "solver.hpp"
+#include "eigen.hpp"
 #include "util.hpp"
 
 using namespace std;

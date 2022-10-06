@@ -17,14 +17,11 @@ find_package(GLUT REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 
-# BLAS
-find_package(BLAS REQUIRED)
-
-# LAPACK
-find_package(LAPACK REQUIRED)
-
 # Eigen
 find_package(Eigen3)
+
+# ALGLIB
+add_subdirectory(lib/alglib)
 
 # OpenMP
 find_package(OpenMP REQUIRED)
@@ -45,20 +42,11 @@ include_directories(
         ${EIGEN3_INCLUDE_DIR}
         ${PNG_INCLUDE_DIRS}
 )
-target_compile_options(
-        arcsim PRIVATE
-        ${BLAS_LINKER_FLAGS}
-        ${LAPACK_LINKER_FLAGS}
-)
 target_link_libraries(
         arcsim
         ${OPENGL_LIBRARIES}
         ${GLUT_LIBRARIES}
         ${JSONCPP_LIBRARIES}
-        ${BLAS_LIBRARIES}
-        cblas
-        ${LAPACK_LIBRARIES}
-        lapacke
         alglib
         Boost::system
         Boost::filesystem

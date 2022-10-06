@@ -29,7 +29,7 @@
 #include "blockvectors.hpp"
 #include "collisionutil.hpp"
 #include "sparse.hpp"
-#include "solver.hpp"
+#include "eigen.hpp"
 #include "io.hpp"
 #include "display.hpp"
 
