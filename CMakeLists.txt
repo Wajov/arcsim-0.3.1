@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
+
+if (WIN32)
+        set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
+endif()
+
 project(arcsim)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -17,6 +22,9 @@ find_package(GLUT REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(JSONCPP jsoncpp)
 
+# PNG
+find_package(PNG REQUIRED)
+
 # Eigen
 find_package(Eigen3)
 
@@ -32,24 +40,31 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}
 # Boost
 find_package(Boost COMPONENTS system filesystem thread REQUIRED)
 
-# PNG
-find_package(PNG REQUIRED)
-
-set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -ldl")
 include_directories(
         ${OPENGL_INCLUDE_DIRS}
         ${GLUT_INCLUDE_DIRS}
-        ${EIGEN3_INCLUDE_DIR}
         ${PNG_INCLUDE_DIRS}
+        ${EIGEN3_INCLUDE_DIR}
+        ${Boost_INCLUDE_DIRS}
 )
-target_link_libraries(
-        arcsim
-        ${OPENGL_LIBRARIES}
-        ${GLUT_LIBRARIES}
-        ${JSONCPP_LIBRARIES}
-        alglib
-        Boost::system
-        Boost::filesystem
-        Boost::thread
-        ${PNG_LIBRARIES}
-)
+if (WIN32)
+        target_link_libraries(
+                arcsim
+                ${OPENGL_LIBRARIES}
+                GLUT::GLUT
+                jsoncpp
+                alglib
+                ${BOOST_LIBRARIES}
+                ${PNG_LIBRARIES}
+        )
+else()
+        target_link_libraries(
+                arcsim
+                ${OPENGL_LIBRARIES}
+                ${GLUT_LIBRARIES}
+                ${JSONCPP_LIBRARIES}
+                alglib
+                ${Boost_LIBRARIES}
+                ${PNG_LIBRARIES}
+        )
+endif()

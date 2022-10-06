@@ -44,7 +44,6 @@
 #undef min
 #undef max
 #include <stdio.h>
-#define snprintf _snprintf
 
 #include <boost/math/special_functions/fpclassify.hpp> 
 template <class T> inline bool isfinite(const T& number) { return boost::math::isfinite(number); }
