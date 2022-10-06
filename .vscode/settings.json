@@ -6,8 +6,5 @@
             "simulate",
             "conf/sphere128.json"
         ]
-    },
-    "files.associations": {
-        "iostream": "cpp"
     }
 }

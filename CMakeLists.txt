@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 if (WIN32)
         set(CMAKE_TOOLCHAIN_FILE "C:/vcpkg/scripts/buildsystems/vcpkg.cmake")
+        add_compile_definitions(_USE_MATH_DEFINES)
 endif()
 
 project(arcsim)
@@ -15,12 +16,16 @@ add_executable(arcsim ${SOURCE})
 # OpenGL
 find_package(OpenGL REQUIRED)
 
-# GLUT
-find_package(GLUT REQUIRED)
+# FreeGLUT
+find_package(FreeGLUT REQUIRED)
 
 # jsoncpp
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(JSONCPP jsoncpp)
+if (WIN32)
+        find_package(jsoncpp CONFIG REQUIRED)
+elseif()
+        find_package(PkgConfig REQUIRED)
+        pkg_check_modules(JSONCPP jsoncpp)
+endif()
 
 # PNG
 find_package(PNG REQUIRED)
@@ -51,17 +56,17 @@ if (WIN32)
         target_link_libraries(
                 arcsim
                 ${OPENGL_LIBRARIES}
-                GLUT::GLUT
-                jsoncpp
+                FreeGLUT::freeglut
+                JsonCpp::JsonCpp
                 ${PNG_LIBRARIES}
                 alglib
-                ${BOOST_LIBRARIES}
+                ${Boost_LIBRARIES}
         )
 else()
         target_link_libraries(
                 arcsim
                 ${OPENGL_LIBRARIES}
-                ${GLUT_LIBRARIES}
+                FreeGLUT::freeglut
                 jsoncpp
                 ${PNG_LIBRARIES}
                 alglib

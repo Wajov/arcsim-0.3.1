@@ -37,7 +37,6 @@
 #pragma warning(disable:4800) // forcing value to bool 'true' or 'false'
 #pragma warning(disable:161)  // unrecognized #pragma
 
-#define _USE_MATH_DEFINES // just to have M_PI
 #include <cmath>
 
 #include <windows.h>

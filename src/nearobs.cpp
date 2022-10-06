@@ -53,7 +53,7 @@ map<Node*, Plane> nearest_obstacle_planes (const vector<Node*>& nodes,
 	const double dmin = 10*::magic.repulsion_thickness;
     vector<Plane> planes(nodes.size(), Plane(Vec3(0),Vec3(0)));
 #pragma omp parallel for
-    for (size_t n = 0; n < nodes.size(); n++) {
+    for (int n = 0; n < nodes.size(); n++) {
         Vec3 x = nodes[n]->x;
         Vec3 p = nearest_point(x, obs_accs, dmin);
         if (p != x)
