@@ -191,13 +191,13 @@ vector<Constraint*> get_constraints (Simulation &sim, bool include_proximity) {
     vector<Constraint*> cons;
     for (int h = 0; h < (int)sim.handles.size(); h++)
         append(cons, sim.handles[h]->get_constraints(sim.time));
-    if (include_proximity && sim.enabled[proximity]) {
-        sim.timers[proximity].tick();
-        append(cons, proximity_constraints(sim.cloth_meshes,
-                                           sim.obstacle_meshes,
-                                           sim.friction, sim.obs_friction));
-        sim.timers[proximity].tock();
-    }
+    // if (include_proximity && sim.enabled[proximity]) {
+    //     sim.timers[proximity].tick();
+    //     append(cons, proximity_constraints(sim.cloth_meshes,
+    //                                        sim.obstacle_meshes,
+    //                                        sim.friction, sim.obs_friction));
+    //     sim.timers[proximity].tock();
+    // }
     return cons;
 }
 
@@ -213,17 +213,6 @@ void update_velocities (vector<Mesh*> &meshes, vector<Vec3> &xold, double dt);
 void step_mesh (Mesh &mesh, double dt);
 
 void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
-    std::ofstream fout("../ClothSimulator/input.txt");
-    fout.precision(20);
-    for (const Node* node : sim.cloths[0].mesh.nodes) {
-        for (int i = 0; i < 3; i++)
-            fout << node->x[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->v[i] << ' ';
-        fout << std::endl;
-    }
-    fout.close();
-
     if (!sim.enabled[physics])
         return;
     sim.timers[physics].tick();

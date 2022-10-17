@@ -95,48 +95,70 @@ void collision_response (vector<Mesh*> &meshes, const vector<Constraint*> &cons,
     xold.clear();
     build_node_lookup(xold, meshes);
     build_node_lookup(xold, obs_meshes);
+
+    std::ofstream fout("../ClothSimulator/input.txt");
+    fout.precision(20);
+    for (const Node* node : sim.cloths[0].mesh.nodes) {
+        for (int i = 0; i < 3; i++)
+            fout << node->x0[i] << ' ';
+        for (int i = 0; i < 3; i++)
+            fout << node->x[i] << ' ';
+        for (int i = 0; i < 3; i++)
+            fout << node->v[i] << ' ';
+        fout << std::endl;
+    }
+    fout.close();
     
     vector<AccelStruct*> accs = create_accel_structs(meshes, true),
                          obs_accs = create_accel_structs(obs_meshes, true);
-    vector<ImpactZone*> zones;
-    ::obs_mass = 1e3;
-    int iter;
-    for (int deform = 0; deform <= 1; deform++) {
-        ::deform_obstacles = deform;
-        zones.clear();
-        for (iter = 0; iter < max_iter; iter++) {
-            if (!zones.empty())
-                update_active(accs, obs_accs, zones);
-            vector<Impact> impacts = find_impacts(accs, obs_accs);
-            impacts = independent_impacts(impacts);
-            if (impacts.empty())
-                break;
-            add_impacts(impacts, zones);
-            for (int z = 0; z < (int)zones.size(); z++) {
-                ImpactZone *zone = zones[z];
-                apply_inelastic_projection(zone, cons);
-            }
-            for (int a = 0; a < (int)accs.size(); a++)
-                update_accel_struct(*accs[a]);
-            for (int a = 0; a < (int)obs_accs.size(); a++)
-                update_accel_struct(*obs_accs[a]);
-            if (deform_obstacles)
-                ::obs_mass /= 2;
-        }
-        if (iter < max_iter) // success!
-            break;
+    vector<Impact> impacts = find_impacts(accs, obs_accs);
+    
+    fout.open("../ClothSimulator/standard_impacts.txt");
+    for (const Impact& impact : impacts) {
+        for (int i = 0; i < 4; i++)
+            fout << impact.nodes[i]->index << ' ';
+        fout << std::endl;
     }
-    if (iter == max_iter) {
-        cerr << "Collision resolution failed to converge!" << endl;
-        // vector<Impact> impacts = find_impacts(accs, obs_accs);
-        // for (size_t i = 0; i < impacts.size(); i++)
-        //     for (int n = 0; n < 4; n++)
-        //         Annotation::add(impacts[i].nodes[n]);
-        // wait_key();
-        //debug_save_meshes(meshes, "meshes");
-        //debug_save_meshes(obs_meshes, "obsmeshes");
-        //exit(1);
-    }
+    fout.close();
+    // vector<ImpactZone*> zones;
+    // ::obs_mass = 1e3;
+    // int iter;
+    // for (int deform = 0; deform <= 1; deform++) {
+    //     ::deform_obstacles = deform;
+    //     zones.clear();
+    //     for (iter = 0; iter < max_iter; iter++) {
+    //         if (!zones.empty())
+    //             update_active(accs, obs_accs, zones);
+    //         vector<Impact> impacts = find_impacts(accs, obs_accs);
+    //         impacts = independent_impacts(impacts);
+    //         if (impacts.empty())
+    //             break;
+    //         add_impacts(impacts, zones);
+    //         for (int z = 0; z < (int)zones.size(); z++) {
+    //             ImpactZone *zone = zones[z];
+    //             apply_inelastic_projection(zone, cons);
+    //         }
+    //         for (int a = 0; a < (int)accs.size(); a++)
+    //             update_accel_struct(*accs[a]);
+    //         for (int a = 0; a < (int)obs_accs.size(); a++)
+    //             update_accel_struct(*obs_accs[a]);
+    //         if (deform_obstacles)
+    //             ::obs_mass /= 2;
+    //     }
+    //     if (iter < max_iter) // success!
+    //         break;
+    // }
+    // if (iter == max_iter) {
+    //     cerr << "Collision resolution failed to converge!" << endl;
+    //     // vector<Impact> impacts = find_impacts(accs, obs_accs);
+    //     // for (size_t i = 0; i < impacts.size(); i++)
+    //     //     for (int n = 0; n < 4; n++)
+    //     //         Annotation::add(impacts[i].nodes[n]);
+    //     // wait_key();
+    //     //debug_save_meshes(meshes, "meshes");
+    //     //debug_save_meshes(obs_meshes, "obsmeshes");
+    //     //exit(1);
+    // }
     for (int m = 0; m < (int)meshes.size(); m++) {
         compute_ws_data(*meshes[m]);
         update_x0(*meshes[m]);
@@ -145,8 +167,8 @@ void collision_response (vector<Mesh*> &meshes, const vector<Constraint*> &cons,
         compute_ws_data(*obs_meshes[o]);
         update_x0(*obs_meshes[o]);
     }
-    for (int z = 0; z < (int)zones.size(); z++)
-        delete zones[z];
+    // for (int z = 0; z < (int)zones.size(); z++)
+    //     delete zones[z];
     destroy_accel_structs(accs);
     destroy_accel_structs(obs_accs);
 }
