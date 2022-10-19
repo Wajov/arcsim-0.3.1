@@ -447,22 +447,6 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
     add_constraint_forces(cons, A, b, dt);
     consistency(b, "constraints");
 
-    // std::ofstream fout("../ClothSimulator/standard.txt");
-    // fout.precision(20);
-    // SpMat<Mat3x3> At = A;
-    // for (int i = 0; i < nn; i++)
-    //     for (int k = 0; k < 3; k++) {
-    //         for (int j = 0; j < nn; j++)
-    //             for (int h = 0; h < 3; h++)
-    //                 fout << At(i, j)(k, h) << ' ';
-    //         fout << std::endl;
-    //     }
-    // for (int i = 0; i < nn; i++)
-    //     for (int j = 0; j < 3; j++)
-    //         fout << b[i][j] << ' ';
-    // fout << std::endl;
-    // fout.close();
-
     vector<Vec3> dv = linear_solve(A, b);
     consistency(dv, "solver");
 

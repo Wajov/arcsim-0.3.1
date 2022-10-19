@@ -176,13 +176,13 @@ void advance_step (Simulation &sim) {
     // consistency("strainlimit");
     collision_step(sim);
     consistency("collision");
-    // // cout << "coll" << endl;wait_key();
-    // if (sim.step % sim.frame_steps == 0) {
-    //     remeshing_step(sim);
-    //     consistency("remeshing");
-    //     sim.frame++;
-    // }
-    // //cout << "rem" << endl;wait_key();
+    // cout << "coll" << endl;wait_key();
+    if (sim.step % sim.frame_steps == 0) {
+        remeshing_step(sim);
+        consistency("remeshing");
+        sim.frame++;
+    }
+    //cout << "rem" << endl;wait_key();
     
     delete_constraints(cons);
 }
@@ -337,6 +337,19 @@ void remeshing_step (Simulation &sim, bool initializing) {
     if (!sim.enabled[remeshing])
         return;
     
+    std::ofstream fout("../ClothSimulator/input.txt");
+    fout.precision(20);
+    for (const Node* node : sim.cloths[0].mesh.nodes) {
+        for (int i = 0; i < 3; i++)
+            fout << node->x0[i] << ' ';
+        for (int i = 0; i < 3; i++)
+            fout << node->x[i] << ' ';
+        for (int i = 0; i < 3; i++)
+            fout << node->v[i] << ' ';
+        fout << std::endl;
+    }
+    fout.close();
+
     // remesh
     sim.timers[remeshing].tick();
     for (size_t c = 0; c < sim.cloths.size(); c++) {
@@ -361,12 +374,12 @@ void remeshing_step (Simulation &sim, bool initializing) {
     }
     
     // separate
-    if (sim.enabled[separation]) {
-        sim.timers[separation].tick();
-        separate(sim.cloth_meshes, sim.obstacle_meshes);
-        sim.timers[separation].tock();
-    }
-    consistency("separation");
+    // if (sim.enabled[separation]) {
+    //     sim.timers[separation].tick();
+    //     separate(sim.cloth_meshes, sim.obstacle_meshes);
+    //     sim.timers[separation].tock();
+    // }
+    // consistency("separation");
 
     // apply pop filter
     if (sim.enabled[popfilter] && !initializing) {

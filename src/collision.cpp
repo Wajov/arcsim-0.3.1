@@ -95,31 +95,9 @@ void collision_response (vector<Mesh*> &meshes, const vector<Constraint*> &cons,
     xold.clear();
     build_node_lookup(xold, meshes);
     build_node_lookup(xold, obs_meshes);
-
-    std::ofstream fout("../ClothSimulator/input.txt");
-    fout.precision(20);
-    for (const Node* node : sim.cloths[0].mesh.nodes) {
-        for (int i = 0; i < 3; i++)
-            fout << node->x0[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->x[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->v[i] << ' ';
-        fout << std::endl;
-    }
-    fout.close();
     
     vector<AccelStruct*> accs = create_accel_structs(meshes, true),
                          obs_accs = create_accel_structs(obs_meshes, true);
-    
-    // vector<Impact> impacts = find_impacts(accs, obs_accs);
-    // fout.open("../ClothSimulator/standard_impacts.txt");
-    // for (const Impact& impact : impacts) {
-    //     for (int i = 0; i < 4; i++)
-    //         fout << impact.nodes[i]->index << ' ';
-    //     fout << std::endl;
-    // }
-    // fout.close();
 
     vector<ImpactZone*> zones;
     ::obs_mass = 1e3;
