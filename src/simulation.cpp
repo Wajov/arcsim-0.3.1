@@ -365,6 +365,16 @@ void remeshing_step (Simulation &sim, bool initializing) {
     sim.timers[remeshing].tock();
     consistency("post mesh");
 
+    fout.open("../ClothSimulator/standard_sizing.txt");
+    fout.precision(20);
+    for (const Node* node : sim.cloths[0].mesh.nodes) {
+        for (int i = 0; i < 2; i++)
+            for (int j = 0; j < 2; j++)
+                fout << node->verts[0]->sizing(i, j) << ' ';
+        fout << std::endl;
+    }
+    fout.close();
+
     // breaking
     if (sim.enabled[fracture] && sim.frame > 1) {
     	for (size_t c = 0; c < sim.cloths.size(); c++) {

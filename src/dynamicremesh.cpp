@@ -70,16 +70,16 @@ void static_remesh (Mesh& mesh) {
 void dynamic_remesh (Mesh& mesh, const map<Node*,Plane> &planes) {
     delete_spaced_out(mesh);
     create_vert_sizing(mesh.verts, planes);
-    vector<Face*> active_faces = mesh.faces;
-    //cout << "before\n"; wait_key();
-    flip_edges(0, active_faces, 0, 0);
-    //cout << "post flip\n"; wait_key();
-    while (split_worst_edge(0, mesh.edges));
-    //cout << "post split\n"; wait_key();
-    active_faces = mesh.faces;
-    while (improve_some_face(0, active_faces));    
-    //cout << "post collapse\n"; wait_key();
-    compute_ms_data(mesh);
+    // vector<Face*> active_faces = mesh.faces;
+    // //cout << "before\n"; wait_key();
+    // flip_edges(0, active_faces, 0, 0);
+    // //cout << "post flip\n"; wait_key();
+    // while (split_worst_edge(0, mesh.edges));
+    // //cout << "post split\n"; wait_key();
+    // active_faces = mesh.faces;
+    // while (improve_some_face(0, active_faces));    
+    // //cout << "post collapse\n"; wait_key();
+    // compute_ms_data(mesh);
 }
 
 void dynamic_remesh (MeshSubset& subset, const map<Node*,Plane> &planes) {
@@ -159,6 +159,9 @@ Mat2x2 fracture_metric (Remeshing& remeshing, const Face* face) {
 
 Mat3x3 compute_face_sizing (Remeshing& remeshing, const Face *face, const map<Node*,Plane> &planes,
                             bool debug) {
+    if (face->v[0]->index == 13 && face->v[1]->index == 46 && face->v[2]->index == 28) {
+        int a = 2;
+    }
 	// project to in-plane 2D
     Mat3x3 base = local_base(normal<MS>(face));
     Mat3x2 UV (base.col(0),base.col(1));
