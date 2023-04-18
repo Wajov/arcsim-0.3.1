@@ -92,18 +92,6 @@ void display_physics (const vector<string> &args) {
     if (!outprefix.empty())
         save(sim, 0);
 
-    std::ofstream fout("mesh.obj");
-    for (const Vert* vert : sim.cloth_meshes[0]->verts) {
-        fout << "v " << vert->node->x[0] + 0.5 << ' ' << vert->node->x[1] + 1.0 << ' ' << vert->node->x[2] - 0.5 << std::endl;
-        fout << "vt " << vert->u[0] << ' ' << vert->u[1] << ' ' << vert->u[2] << std::endl;
-    }
-    for (const Face* face : sim.cloth_meshes[0]->faces) {
-        int x = face->v[0]->node->uuid + 1;
-        int y = face->v[1]->node->uuid + 1;
-        int z = face->v[2]->node->uuid + 1;
-        fout << "f " << x << '/' << x << ' ' << y << '/' << y << ' ' << z << '/' << z << std::endl;
-    }
-
     run_glut();
 }
 

@@ -222,7 +222,7 @@ void save_obj (const Mesh &mesh, const string &filename) {
     fstream file(filename.c_str(), ios::out);
     for (int v = 0; v < (int)mesh.verts.size(); v++) {
         const Vert *vert = mesh.verts[v];
-        file << "ms " << vert->u[0] << " " << vert->u[1] << " " << vert->u[2] << endl;
+        file << "vt " << vert->u[0] << " " << vert->u[1] << " " << vert->u[2] << endl;
         //if (vert->label)
         //    file << "vl " << vert->label << endl;
     }

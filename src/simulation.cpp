@@ -170,10 +170,10 @@ void advance_step (Simulation &sim) {
     physics_step(sim, cons);
     //cout << "phys" << endl;wait_key();
     consistency("physics");
-    // plasticity_step(sim);
-    // consistency("plasticity");
-    // strainlimiting_step(sim, cons);
-    // consistency("strainlimit");
+    plasticity_step(sim);
+    consistency("plasticity");
+    strainlimiting_step(sim, cons);
+    consistency("strainlimit");
     collision_step(sim);
     consistency("collision");
     // cout << "coll" << endl;wait_key();
@@ -191,13 +191,13 @@ vector<Constraint*> get_constraints (Simulation &sim, bool include_proximity) {
     vector<Constraint*> cons;
     for (int h = 0; h < (int)sim.handles.size(); h++)
         append(cons, sim.handles[h]->get_constraints(sim.time));
-    // if (include_proximity && sim.enabled[proximity]) {
-    //     sim.timers[proximity].tick();
-    //     append(cons, proximity_constraints(sim.cloth_meshes,
-    //                                        sim.obstacle_meshes,
-    //                                        sim.friction, sim.obs_friction));
-    //     sim.timers[proximity].tock();
-    // }
+    if (include_proximity && sim.enabled[proximity]) {
+        sim.timers[proximity].tick();
+        append(cons, proximity_constraints(sim.cloth_meshes,
+                                           sim.obstacle_meshes,
+                                           sim.friction, sim.obs_friction));
+        sim.timers[proximity].tock();
+    }
     return cons;
 }
 
@@ -224,13 +224,13 @@ void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
 
         activate_nodes(mesh.nodes);
         add_external_forces(mesh.nodes, mesh.faces, sim.gravity, sim.wind, fext, Jext);
-//        for (size_t h = 0; h < sim.handles.size(); h++)
-//            sim.handles[h]->add_forces(sim.time,fext,Jext);
-//
-//        for (size_t m = 0; m < sim.morphs.size(); m++)
-//            if (sim.morphs[m].mesh == &sim.cloths[c].mesh)
-//                add_morph_forces(sim.cloths[c], sim.morphs[m], sim.time,
-//                                 sim.step_time, fext, Jext);
+       for (size_t h = 0; h < sim.handles.size(); h++)
+           sim.handles[h]->add_forces(sim.time,fext,Jext);
+
+       for (size_t m = 0; m < sim.morphs.size(); m++)
+           if (sim.morphs[m].mesh == &sim.cloths[c].mesh)
+               add_morph_forces(sim.cloths[c], sim.morphs[m], sim.time,
+                                sim.step_time, fext, Jext);
 
         vector<Vec3> dv = implicit_update(mesh.nodes, mesh.edges, mesh.faces, 
                                           fext, Jext, cons, sim.step_time);
@@ -239,7 +239,7 @@ void physics_step (Simulation &sim, const vector<Constraint*> &cons) {
             mesh.nodes[n]->v += dv[n];
             mesh.nodes[n]->acceleration = dv[n] / sim.step_time;
         }
-        //project_outside(mesh.nodes, cons);
+        project_outside(mesh.nodes, cons);
         deactivate_nodes(mesh.nodes);
     }
     consistency("physics-pre");
@@ -336,19 +336,6 @@ void collision_step (Simulation &sim) {
 void remeshing_step (Simulation &sim, bool initializing) {
     if (!sim.enabled[remeshing])
         return;
-    
-    std::ofstream fout("../ClothSimulator/input.txt");
-    fout.precision(20);
-    for (const Node* node : sim.cloths[0].mesh.nodes) {
-        for (int i = 0; i < 3; i++)
-            fout << node->x0[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->x[i] << ' ';
-        for (int i = 0; i < 3; i++)
-            fout << node->v[i] << ' ';
-        fout << std::endl;
-    }
-    fout.close();
 
     // remesh
     sim.timers[remeshing].tick();
@@ -365,16 +352,6 @@ void remeshing_step (Simulation &sim, bool initializing) {
     sim.timers[remeshing].tock();
     consistency("post mesh");
 
-    fout.open("../ClothSimulator/standard_sizing.txt");
-    fout.precision(20);
-    for (const Node* node : sim.cloths[0].mesh.nodes) {
-        for (int i = 0; i < 2; i++)
-            for (int j = 0; j < 2; j++)
-                fout << node->verts[0]->sizing(i, j) << ' ';
-        fout << std::endl;
-    }
-    fout.close();
-
     // breaking
     if (sim.enabled[fracture] && sim.frame > 1) {
     	for (size_t c = 0; c < sim.cloths.size(); c++) {
@@ -384,12 +361,12 @@ void remeshing_step (Simulation &sim, bool initializing) {
     }
     
     // separate
-    // if (sim.enabled[separation]) {
-    //     sim.timers[separation].tick();
-    //     separate(sim.cloth_meshes, sim.obstacle_meshes);
-    //     sim.timers[separation].tock();
-    // }
-    // consistency("separation");
+    if (sim.enabled[separation]) {
+        sim.timers[separation].tick();
+        separate(sim.cloth_meshes, sim.obstacle_meshes);
+        sim.timers[separation].tock();
+    }
+    consistency("separation");
 
     // apply pop filter
     if (sim.enabled[popfilter] && !initializing) {
@@ -399,7 +376,7 @@ void remeshing_step (Simulation &sim, bool initializing) {
             apply_pop_filter(sim.cloths[c], cons);
         delete_constraints(cons);
         sim.timers[popfilter].tock();
-    }    
+    }
 }
 
 void update_velocities (vector<Mesh*> &meshes, vector<Vec3> &xold, double dt) {

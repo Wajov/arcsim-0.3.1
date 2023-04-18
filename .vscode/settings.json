@@ -4,7 +4,7 @@
         "cwd": "${workspaceFolder}",
         "args": [
             "simulate",
-            "conf/sphere128.json"
+            "conf/sphere.json"
         ]
     },
     "files.associations": {

@@ -48,6 +48,10 @@ void create_vert_sizing (vector<Vert*>& verts, const map<Node*,Plane> &planes);
 
 // The algorithm
 
+vector<Edge*> find_edges_to_flip (vector<Face*>& active_faces);
+vector<Edge*> independent_edges (const vector<Edge*> &edges);
+vector<Edge*> find_bad_edges (const vector<Edge*>& edges);
+
 void flip_edges (MeshSubset* subset, vector<Face*>& active_faces, 
 				 vector<Edge*>* update_edges, vector<Face*>* update_faces);
 
@@ -70,16 +74,16 @@ void static_remesh (Mesh& mesh) {
 void dynamic_remesh (Mesh& mesh, const map<Node*,Plane> &planes) {
     delete_spaced_out(mesh);
     create_vert_sizing(mesh.verts, planes);
-    // vector<Face*> active_faces = mesh.faces;
-    // //cout << "before\n"; wait_key();
-    // flip_edges(0, active_faces, 0, 0);
-    // //cout << "post flip\n"; wait_key();
-    // while (split_worst_edge(0, mesh.edges));
-    // //cout << "post split\n"; wait_key();
-    // active_faces = mesh.faces;
-    // while (improve_some_face(0, active_faces));    
-    // //cout << "post collapse\n"; wait_key();
-    // compute_ms_data(mesh);
+    vector<Face*> active_faces = mesh.faces;
+    //cout << "before\n"; wait_key();
+    flip_edges(0, active_faces, 0, 0);
+    //cout << "post flip\n"; wait_key();
+    while (split_worst_edge(0, mesh.edges));
+    //cout << "post split\n"; wait_key();
+    active_faces = mesh.faces;
+    while (improve_some_face(0, active_faces));    
+    //cout << "post collapse\n"; wait_key();
+    compute_ms_data(mesh);
 }
 
 void dynamic_remesh (MeshSubset& subset, const map<Node*,Plane> &planes) {
@@ -159,9 +163,6 @@ Mat2x2 fracture_metric (Remeshing& remeshing, const Face* face) {
 
 Mat3x3 compute_face_sizing (Remeshing& remeshing, const Face *face, const map<Node*,Plane> &planes,
                             bool debug) {
-    if (face->v[0]->index == 13 && face->v[1]->index == 46 && face->v[2]->index == 28) {
-        int a = 2;
-    }
 	// project to in-plane 2D
     Mat3x3 base = local_base(normal<MS>(face));
     Mat3x2 UV (base.col(0),base.col(1));
@@ -261,8 +262,6 @@ double edge_metric (const Edge *edge) {
 }
 
 // Fixing-upping
-vector<Edge*> find_edges_to_flip (vector<Face*>& active_faces);
-vector<Edge*> independent_edges (const vector<Edge*> &edges);
 
 bool flip_some_edges (MeshSubset* subset, vector<Face*>& active_faces, 
 					  vector<Edge*>* update_edges, vector<Face*>* update_faces) {
@@ -275,8 +274,11 @@ bool flip_some_edges (MeshSubset* subset, vector<Face*>& active_faces,
     n_edges_prev = edges.size();
     for (size_t e = 0; e < edges.size(); e++) {
         RemeshOp op = flip_edge(edges[e]);
-        if (op.empty()) continue;
+        if (op.empty())
+            continue;
         
+        if (verbose)
+            cout << "Flip " << edges[e]->n[0]->verts[0]->index << " and " << edges[e]->n[1]->verts[0]->index << endl;
         did_flip = true;
         if (subset)
         	op.update(subset->active_nodes);
@@ -352,7 +354,7 @@ bool should_flip (const Edge *edge) {
     const Vert *vert0 = edge_vert(edge, 0, 0), *vert1 = edge_vert(edge, 0, 1),
                *vert2 = edge_opp_vert(edge, 0), *vert3 = edge_opp_vert(edge, 1);
     Vec3 x = vert0->u, z = vert1->u, w = vert2->u, y = vert3->u;
-    
+
     // don't flip if high angles are involved
     if (fabs(dihedral_angle<WS>(edge)) >= max_angle) return false;
     
@@ -397,7 +399,7 @@ bool split_worst_edge (MeshSubset* subset, const vector<Edge*>& edges) {
         op.set_null(bad_edges);
         op.done();
         if (verbose)
-            cout << "Split " << node0 << " and " << node1 << endl;
+            cout << "Split " << node0->verts[0]->index << " and " << node1->verts[0]->index << endl;
         vector<Face*> active = op.added_faces;
         flip_edges(subset, active, &bad_edges, 0);
     }
@@ -482,7 +484,7 @@ RemeshOp try_edge_collapse (Edge *edge, int which) {
     if (op.empty())
         return op;
     if (verbose)
-        cout << "Collapsed " << node0 << " into " << node1 << endl;
+        cout << "Collapsed " << node0->verts[0]->index << " into " << node1->verts[0]->index << endl;
     return op;
 }
 

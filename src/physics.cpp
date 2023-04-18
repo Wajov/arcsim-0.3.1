@@ -325,6 +325,7 @@ void add_internal_forces (const vector<Face*>& faces, const vector<Edge*>& edges
             add_subvec(dt*(F + (dt+damping)*J*vs), indices(n0,n1,n2), b);
         }
     }
+
     for (size_t e = 0; e < edges.size(); e++) {
         const Edge *edge = edges[e];
         if (!edge->adjf[0] || !edge->adjf[1])
@@ -441,9 +442,9 @@ vector<Vec3> implicit_update (vector<Node*>& nodes, const vector<Edge*>& edges, 
     consistency((vector<Vec3>&)fext, "fext");
     consistency(b, "init");
     add_internal_forces<WS>(faces, edges, A, b, dt);
-    consistency(b, "internal forces");
-    // add_friction_forces(cons, A, b, dt);
-    // consistency(b, "friction");
+    consistency(b, "internal forces");    
+    add_friction_forces(cons, A, b, dt);
+    consistency(b, "friction");
     add_constraint_forces(cons, A, b, dt);
     consistency(b, "constraints");
 
@@ -468,6 +469,7 @@ void add_external_forces (const vector<Node*>& nodes, const vector<Face*>& faces
     for (size_t n = 0; n < nodes.size(); n++) {
         fext[n] += nodes[n]->m*gravity;
     }
+
     for (size_t f = 0; f < faces.size(); f++) {
         const Face *face = faces[f];
         Vec3 fw = wind_force(face, wind);
