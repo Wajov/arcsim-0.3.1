@@ -10,7 +10,7 @@ Note: In order to study ARCSim, I annotated some lines. I recovered most of them
 
 # Dependencies
 
-- FreeGPU
+- FreeGLUT
 - jsoncpp
 - libPNG
 - Eigen3
